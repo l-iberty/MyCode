@@ -4,14 +4,14 @@ public class Directory{
 	static ArrayList<Person> personList = new ArrayList<>();
 	
 	public static void main(String[] arg){
-		Tips tips = new Tips();
-		tips.showTips();
+		DirectoryManager dm = new DirectoryManager();
+		DirectoryManager.showTips();
 	}
 }
 
-class Tips{
+class DirectoryManager{
 	private int choice;
-	private ManagerChoice mce = new ManagerChoice();
+	private ManageChoice mce = new ManagerChoice();
 	
 	public void showTips(){
 		System.out.println("-----------Directory Manager------------");
@@ -33,7 +33,7 @@ class Tips{
 			}
 			
 			if(choice != 5){
-				mce.managerChoice(choice);
+				mce.manageChoice(choice);
 				choice = -1; /** If I don't do this,there will be a singular BUG
 								 when the user enters something unexpected. **/
 			}
@@ -42,9 +42,9 @@ class Tips{
 		}
 	}
 	
-	private class ManagerChoice{
+	private class ManageChoice{
 	
-		public void managerChoice(int inChoice){
+		public void manageChoice(int inChoice){
 			switch(inChoice){
 				case 1:
 					addInformation();
