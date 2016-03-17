@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Directory{
-	static ArrayList<Person> personList = new ArrayList<>();
+	ArrayList<Person> personList = new ArrayList<>();
 	
 	public static void main(String[] arg){
 		DirectoryManager dm = new DirectoryManager();
@@ -12,6 +12,7 @@ public class Directory{
 class DirectoryManager{
 	private int choice;
 	private ManageChoice mce = new ManageChoice();
+	Directory directory = new Directory();
 	
 	public void showTips(){
 		System.out.println("-----------Directory Manager------------");
@@ -59,7 +60,7 @@ class DirectoryManager{
 					break;
 				
 				case 4:
-					if(Directory.personList.size() == 0)
+					if(directory.personList.size() == 0)
 						System.out.println(">> No Record in the Directory");
 					else
 						showInformation();
@@ -81,9 +82,9 @@ class DirectoryManager{
 			inTelephone = getTel.nextLine();
 				
 			Person ref = new Person(inName, inTelephone);
-			Directory.personList.add(ref);
+			directory.personList.add(ref);
 			
-			if(Directory.personList.size() > 0){
+			if(directory.personList.size() > 0){
 				System.out.println("------------------------------------------");
 				System.out.println("Done Successfully!");
 			}
@@ -96,7 +97,7 @@ class DirectoryManager{
 		private void delInformation(){
 			int tmpChoice = -1;
 		
-			if(Directory.personList.size() == 0)
+			if(directory.personList.size() == 0)
 				System.out.println(">> No Record in the Directory");
 			else{
 				System.out.println("------------------------------------------");
@@ -117,11 +118,11 @@ class DirectoryManager{
 				}
 				
 				if(tmpChoice == 0){
-					Directory.personList.clear();
+					directory.personList.clear();
 					System.out.println(">> Deleted! Enter \"4\" to check the result.");
 				}
-				else if(tmpChoice-1 < Directory.personList.size() && tmpChoice-1 >= 0){
-					Directory.personList.remove(tmpChoice-1);
+				else if(tmpChoice-1 < directory.personList.size() && tmpChoice-1 >= 0){
+					directory.personList.remove(tmpChoice-1);
 					System.out.println(">> Deleted! Enter \"4\" to check the result.");
 				}
 				else
@@ -137,7 +138,7 @@ class DirectoryManager{
 			int count; /** each time the program finds a matching element
 						   the variable count will increase by 1. **/
 						   
-			if(Directory.personList.size() == 0){
+			if(directory.personList.size() == 0){
 				System.out.println(">> No Record in the Directory");
 			}else{
 				System.out.println("------------------------------------------");
@@ -149,8 +150,8 @@ class DirectoryManager{
 					System.out.print("Please enter the name to search: ");
 					tmpName = new Scanner(System.in).nextLine();
 				
-					for(j = 0, count = 0; j < Directory.personList.size(); j++){
-						Person tmp = Directory.personList.get(j);
+					for(j = 0, count = 0; j < directory.personList.size(); j++){
+						Person tmp = directory.personList.get(j);
 					
 						if(tmp.name.equals(tmpName)){
 							count++;
@@ -167,8 +168,8 @@ class DirectoryManager{
 					System.out.print("Please enter the telephone number to search: ");
 					tmpTel = new Scanner(System.in).nextLine();
 				
-					for(j = 0, count = 0; j < Directory.personList.size(); j++){
-						Person tmp = Directory.personList.get(j);
+					for(j = 0, count = 0; j < directory.personList.size(); j++){
+						Person tmp = directory.personList.get(j);
 					
 						if(tmp.telephone.equals(tmpTel)){
 							count++;
@@ -188,8 +189,8 @@ class DirectoryManager{
 		
 		private void showInformation(){
 			System.out.print("\n------------------------------------------");
-			for(int i = 0; i < Directory.personList.size(); i++){
-				Person tmp = Directory.personList.get(i);
+			for(int i = 0; i < directory.personList.size(); i++){
+				Person tmp = directory.personList.get(i);
 				System.out.println("\nPerson " + (i+1) + ":");
 				System.out.println("Name: " + tmp.name);
 				System.out.println("Telephone Number: " + tmp.telephone);
