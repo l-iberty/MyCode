@@ -4,14 +4,14 @@ public class Directory{
 	ArrayList<Person> personList = new ArrayList<>();
 	
 	public static void main(String[] arg){
-		DirectoryManager dm = new DirectoryManager();
-		dm.showTips();
+		DirectoryTips dt = new DirectoryTips();
+		dt.showTips();
 	}
 }
 
-class DirectoryManager{
+class DirectoryTips{
 	private int choice;
-	private ChoiceManager mce = new ChoiceManager();
+	private ChoiceManager cm = new ChoiceManager();
 	
 	public void showTips(){
 		System.out.println("-----------Directory Manager------------");
@@ -33,7 +33,7 @@ class DirectoryManager{
 			}
 			
 			if(choice != 5){
-				mce.manageChoice(choice);
+				cm.manageChoice(choice);
 				choice = -1; /** If I don't do this,there will be a singular BUG
 								when the user enters something unexpected. **/
 			}
@@ -71,32 +71,33 @@ class ChoiceManager{
 	}
 		
 	private void addInformation(){
-		String inName;
-		String inTelephone;
-
-		System.out.print("\nPlease enter the name: ");
-		Scanner getName = new Scanner(System.in);
-		inName = getName.nextLine();
+		String inName = null;
+		String inTelephone = null;
+		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("Please enter the telephone number: ");
-		Scanner getTel = new Scanner(System.in);
-		inTelephone = getTel.nextLine();
-			
+		inName = getName(inName, sc);
+		inTelephone = getTel(inTelephone, sc);
+		
 		Person ref = new Person(inName, inTelephone);
 		directory.personList.add(ref);
+	}
+	
+	private String getName(String inName, Scanner sc){
+		System.out.print("\nPlease enter the name: ");
+		inName = sc.nextLine();
 		
-		if(directory.personList.size() > 0){
-			System.out.println("------------------------------------------");
-			System.out.println("Done Successfully!");
-		}
-		else{
-			System.out.println("------------------------------------------");
-			System.out.println("Fail to add information!");
-		}
+		return inName;
+	}
+	
+	private String getTel(String inTelephone, Scanner sc){
+		System.out.print("Please enter the telephone number: ");
+		inTelephone = sc.nextLine();
+		
+		return inTelephone;
 	}
 		
 	private void delInformation(){
-		int tmpChoice = -1;
+		int delChoice = -1;
 	
 		if(directory.personList.size() == 0)
 			System.out.println(">> No Record in the Directory");
@@ -112,32 +113,30 @@ class ChoiceManager{
 			System.out.println("");
 		
 			try{
-				Scanner getTmpChoice = new Scanner(System.in);
-				tmpChoice = getTmpChoice.nextInt();
+				Scanner sc = new Scanner(System.in);
+				delChoice = sc.nextInt();
 			}catch(InputMismatchException e){
 				;
 			}
-			
-			if(tmpChoice == 0){
-				directory.personList.clear();
-				System.out.println(">> Deleted! Enter \"4\" to check the result.");
-			}
-			else if(tmpChoice-1 < directory.personList.size() && tmpChoice-1 >= 0){
-				directory.personList.remove(tmpChoice-1);
-				System.out.println(">> Deleted! Enter \"4\" to check the result.");
-			}
-			else
-				;
+			judgeChoice(delChoice);
 		}
 	}
 	
+	private void judgeChoice(int delChoice){
+		if(delChoice == 0){
+			directory.personList.clear();
+			System.out.println(">> Deleted! Enter \"4\" to check the result.");
+		}
+		else if(delChoice-1 < directory.personList.size() && delChoice-1 >= 0){
+			directory.personList.remove(delChoice-1);
+			System.out.println(">> Deleted! Enter \"4\" to check the result.");
+		}
+		else
+			;
+	}
+	
 	private void searchInformation(){
-		String tmpName;
-		String tmpTel;
-		String search;
-		int j; // j means the index of the element
-		int count; /** each time the program finds a matching element
-					   the variable count will increase by 1. **/
+		String type;
 					   
 		if(directory.personList.size() == 0){
 			System.out.println(">> No Record in the Directory");
@@ -145,47 +144,73 @@ class ChoiceManager{
 			System.out.println("------------------------------------------");
 			System.out.println("<A> Enter \"A\" to search via name\n"+
 							   "<B> Enter \"B\" to search via telephone number");
-			search = new Scanner(System.in).nextLine();
-						
-			if(search.equals("a") || search.equals("A")){
-				System.out.print("Please enter the name to search: ");
-				tmpName = new Scanner(System.in).nextLine();
-			
-				for(j = 0, count = 0; j < directory.personList.size(); j++){
-					Person tmp = directory.personList.get(j);
-				
-					if(tmp.name.equals(tmpName)){
-						count++;
-						System.out.println("------------------------------------------");
-						System.out.println("\nSearching...");
-						System.out.println("Name: " + tmp.name);
-						System.out.println("Telephone Number: " + tmp.telephone);
-					}
-				}
-				if(count == 0)
-					System.out.println("Not Found!");
-			}
-			else if(search.equals("b") || search.equals("B")){
-				System.out.print("Please enter the telephone number to search: ");
-				tmpTel = new Scanner(System.in).nextLine();
-			
-				for(j = 0, count = 0; j < directory.personList.size(); j++){
-					Person tmp = directory.personList.get(j);
-				
-					if(tmp.telephone.equals(tmpTel)){
-						count++;
-						System.out.println("------------------------------------------");
-						System.out.println("\nSearching...");
-						System.out.println("Name: " + tmp.name);
-						System.out.println("Telephone Number: " + tmp.telephone);
-					}
-				}
-				if(count == 0)
-					System.out.println("Not Found!");
-			}
-			else
-				System.out.println(">> Invalid Input!Unable to search!");
+			type = new Scanner(System.in).nextLine();
+			searchType(type);			
 		}
+	}
+	
+	private void searchType(String type){
+		String tmpName;
+		String tmpTel;
+		Scanner sc = new Scanner(System.in);
+		
+		if(type.equals("a") || type.equals("A")){
+			System.out.print("Please enter the name to search: ");
+			tmpName = sc.nextLine();
+		
+			nameIterator(tmpName);
+		}
+		else if(type.equals("b") || type.equals("B")){
+			System.out.print("Please enter the telephone number to search: ");
+			tmpTel = sc.nextLine();
+		
+			telIterator(tmpTel);
+		}else
+			System.out.println(">> Invalid Input!Unable to search!");
+	}
+	
+	private void nameIterator(String info){
+		Person tmp = null;
+		int j;
+		int count;
+		boolean flag = false;
+					   
+		for(j = 0, count = 0; j < directory.personList.size() && !flag; j++){
+			tmp = directory.personList.get(j);
+		
+			if(tmp.name.equals(info)){
+				count++;
+				flag = true; // Once the target found, end the loop
+				System.out.println("------------------------------------------");
+				System.out.println("\nSearching...");
+				System.out.println("Name: " + tmp.name);
+				System.out.println("Telephone Number: " + tmp.telephone);
+			}
+		}
+		if(count == 0)
+			System.out.println("Not Found!");
+	}
+	
+	private void telIterator(String info){
+		Person tmp = null;
+		int j;
+		int count;
+		boolean flag = false;
+					   
+		for(j = 0, count = 0; j < directory.personList.size() && !flag; j++){
+			tmp = directory.personList.get(j);
+		
+			if(tmp.telephone.equals(info)){
+				count++;
+				flag = true; // Once the target found, end the loop
+				System.out.println("------------------------------------------");
+				System.out.println("\nSearching...");
+				System.out.println("Name: " + tmp.name);
+				System.out.println("Telephone Number: " + tmp.telephone);
+			}
+		}
+		if(count == 0)
+			System.out.println("Not Found!");
 	}
 	
 	private void showInformation(){
