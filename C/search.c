@@ -13,9 +13,9 @@ int main(void)
 	for(k = 0; k < 10; k++)
 		printf("%d ", s[k]);
 		
-	int e = search(20, s, 10);
+	int e = search(7, s, 10);
 	
-	printf("\n%d", e);
+	printf("\nIndex: %d", e);
 }
 
 void sort(int array[], int length)
@@ -36,7 +36,7 @@ int search(int key, int array[], int length)
 {
 	int low = 0;
 	int	high = length - 1;
-	int mid = (mid + high) / 2;
+	int mid;
 			
 	while(low <= high)
 	{
@@ -51,7 +51,7 @@ int search(int key, int array[], int length)
 	}
 	
 	if(key == array[mid])
-		return key;
+		return mid;
 	else
 		return -1; 
 }
