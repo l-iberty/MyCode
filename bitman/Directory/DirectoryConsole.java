@@ -17,12 +17,11 @@ class TipsManager{
 		System.out.println("<2> Delete Directory");
 		System.out.println("<3> Search Directory");
 		System.out.println("<4> Show Directory");
-		System.out.println("<5> Back to the menu");
-		System.out.println("<6> Exit");
+		System.out.println("<5> Back");
 			
 		while(flag){
 			System.out.println("--------------------------------------------");
-			System.out.println("\n>>> Please enter 0-6,others are invalid.>>>");
+			System.out.println("\n>>> Please enter 0-5,others are invalid.>>>");
 			
 			cm.manageChoice(cm.getChoice());
 		}
@@ -63,10 +62,6 @@ class ChoiceManager{
 				break;
 				
 			case 5:
-				new TipsManager().flag = false;
-				break;
-				
-			case 6:
 				System.exit(0);
 				
 			default:
