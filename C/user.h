@@ -1,8 +1,8 @@
-/**
- * char *strdel(char *str, const char ch);
- * int str_cmp(const char *str1, const char *str2);
- * char* strcpy(char *dest, const char *source);
- **/
+
+char *strdel(char *str, const char ch);
+int str_cmp(const char *str1, const char *str2);
+char* strcpy(char *dest, const char *source);
+int equals(const char *str1, const char *str2);
  
 char* strdel(char *str, const char ch)
 {
@@ -45,4 +45,21 @@ char* strcpy(char *dest, const char *source)
 	} while (*ch2);
 	/* 拷贝时包括'\0' */
 	return dest;
+}
+
+/* 实现类似Java中String类的equals()方法的功能 */
+int equals(const char *str1, const char *str2)
+{
+	char *ch1, *ch2;
+	ch1 = (char *)str1;
+	ch2 = (char *)str2;
+	
+	while(*ch1 == *ch2 && *ch1 && *ch2){
+		ch1++;
+		ch2++;
+	}
+	if(!(*ch1) && !(*ch2)) // 同时到达行尾字符
+		return 1;
+	else
+		return 0;
 }
