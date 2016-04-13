@@ -23,7 +23,7 @@ void sort(int array[], int length)
 	int i,j,tmp;
 	
 	for(i = 1; i < length; i++)
-		for(j = 0; j < length - 1; j++)
+		for(j = 0; j < length - i; j++)
 			if(array[j] > array[j+1])
 			{
 				tmp = array[j];
