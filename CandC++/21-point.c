@@ -66,6 +66,10 @@ void begin()
 			/* 内层循环:一直抽牌,直到点数大于或等于N */
 			do {
 				k = 1 + rand() % (52 - 1 + 1);
+				/* 范围(n,m):
+				 * 随机数 = 下界 + rand % 距离差.
+				 * 下界 = n; 距离差 = m - n + 1.
+				 */
 				rpoint = poker[k];
 
 				if (rpoint == 11)
