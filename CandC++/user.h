@@ -34,17 +34,10 @@ int strcmp(const char *str1, const char *str2)
 /* 针对VS不准我用strcpy()这个问题,我自己实现它 */
 char* strcpy(char *dest, const char *source)
 {
-	char *ch1, *ch2;
-	ch1 = dest;
-	ch2 = source;
-
-	do{
-		*ch1 = *ch2;
-		ch1++;
-		ch2++;
-	} while (*ch2);
+	char *ch = dest;
+	while((*(dest++) = *(source++)) != '\0');
 	/* 拷贝时包括'\0' */
-	return dest;
+	return ch;
 }
 
 /* 实现类似Java中String类的equals()方法的功能 */
