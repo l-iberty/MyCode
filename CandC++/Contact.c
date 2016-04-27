@@ -3,7 +3,8 @@
 #include <conio.h>
 
 struct People* addRecord(struct People *head, struct People *new, char *inName, char *inTel);
-void searchRecord(struct People *head);
+int searchRecord(struct People *head);
+void show(struct People *head, int index);
 struct People* deleteRecord(struct People *head);
 struct People* delFisrt(struct People *head);
 struct People* delMiddle(struct People *head, int index);
@@ -21,10 +22,10 @@ struct People {
 };
 
 int main() {
-	int flag, flag1, flag2;
+	int flag, flag1, flag2, index;
 	struct People *head, *new;
 	head = NULL;
-	char choice, index;
+	char choice;
 	char inName[10], inTel[12];
 
 	flag = 1;
@@ -67,10 +68,13 @@ int main() {
 			head = deleteRecord(head);
 			break;
 		case '3':
-			searchRecord(head);
+			index = searchRecord(head);
+			show(head, index);
 			break;
 		case '4':
 			display(head);
+			printf("Press any key to continue...");
+			getch();
 			break;
 		case '5':
 			flag = 0;
@@ -104,15 +108,15 @@ struct People* addRecord(struct People *head, struct People *new, char *inName, 
 	return head;
 }
 
-void searchRecord(struct People *head) {
-	int i, flag = 1;
+int searchRecord(struct People *head) {
+	int index = 0, flag = 1;
 	char name[10], telephone[12], type;
 	struct People* current;
 	current = head;
 
 	if(!size(head)){
 		printf("\nNo records!\n");
-		return;
+		return 0;
 	}
 	
 	printf("1.Search by name\n");
@@ -122,35 +126,50 @@ void searchRecord(struct People *head) {
 	if (type == '1') {
 		printf("\nPlease enter the name: ");
 		scanf("%s", name);
-		while (current != NULL && flag) {
-			if (equals(name, current->name)) {
-				printf("\nName: %s\n", current->name);
-				printf("Telephone: %s\n", current->telephone);
-				flag = 0;
-			}
+		while (current != NULL) {
+			index++;
+			if (equals(name, current->name))
+				return index;
 			else
 				current = current->next;
 		}
-		if (current == NULL)
-			printf("\nNot found!\n");
 	}
 	else if (type == '2') {
 		printf("\nPlease enter the telephone: ");
 		scanf("%s", telephone);
-		while (current != NULL && flag) {
-			if (equals(telephone, current->telephone)) {
-				printf("\nName: %s\n", current->name);
-				printf("Telephone: %s\n", current->telephone);
-				flag = 0;
-			}
+		while (current != NULL) {
+			index++;
+			if (equals(telephone, current->telephone))
+				return index;
 			else
 				current = current->next;
 		}
-		if (current == NULL)
-			printf("\nNot found!\n");
 	}
 	else
 		printf("\nInvalid Input!\n");
+		
+	if (current == NULL)
+		return -1;
+}
+
+void show(struct People *head, int index){
+	struct People *current;
+	int i;
+	
+	if(index < 0){
+		printf("\nNot Found!\n");
+		return;
+	}
+	else if(!index)
+		return;
+	
+	current = head;
+	for(i = 1; i < index; i++,current = current->next);
+	
+	printf("\nName: %s\n", current->name);
+	printf("Telephone: %s\n", current->telephone);
+	printf("Press any key to continue...");
+	getch();
 }
 
 void display(struct People *head) {
