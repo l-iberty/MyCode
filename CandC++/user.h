@@ -1,8 +1,9 @@
 
 char *strdel(char *str, const char ch);
-int str_cmp(const char *str1, const char *str2);
+int strcmp(const char *str1, const char *str2);
 char* strcpy(char *dest, const char *source);
 int equals(const char *str1, const char *str2);
+void select_sort(int A[], int n);
  
 char* strdel(char *str, const char ch)
 {
@@ -55,4 +56,22 @@ int equals(const char *str1, const char *str2)
 		return 1;
 	else
 		return 0;
+}
+
+void select_sort(int A[], int n) {
+	int i, j, min, tmp;
+
+	for (i = 0;i < n - 1;i++) {
+		min = i;
+		/* 找最小值 */
+		for (j = i + 1;j < n;j++)
+			if (A[j] < A[min])
+				min = j;
+
+		if (min != i) {
+			tmp = A[min];
+			A[min] = A[i];
+			A[i] = tmp;
+		}
+	}
 }
