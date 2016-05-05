@@ -22,7 +22,7 @@ int main()
 	i = 0;
 	while ((ch = fgetc(fp)) != EOF) {
 		j = 0;
-		while (ch != '\n') {
+		while (ch != '\n' && ch != EOF) {
 			// i标记行, j标记每行的每个字符
 			str[i][j++] = ch;
 			ch = fgetc(fp);
