@@ -1,10 +1,9 @@
-
 char *strdel(char *str, const char ch);
 int strcmp(const char *str1, const char *str2);
 char* strcpy(char *dest, const char *source);
 int equals(const char *str1, const char *str2);
 void select_sort(int A[], int n);
- 
+
 char* strdel(char *str, const char ch)
 {
 	int i, j;
@@ -32,27 +31,30 @@ int strcmp(const char *str1, const char *str2)
 	return 0;
 }
 
-/* 针对VS不准我用strcpy()这个问题,我自己实现它 */
+/* 没有考虑内存重叠问题 */
 char* strcpy(char *dest, const char *source)
 {
 	char *ch = dest;
 	while((*(dest++) = *(source++)) != '\0');
 	/* 拷贝时包括'\0' */
+	/** 说明:
+	 * dest和source是实参的拷贝,与实参指向同一位置,自增进行时实参没有任何变化,
+	 * 自增操作是对实参的读操作,"*source = 'a'"对实参进行写操作,这是不允许的.
+	 * 另外在处理返回值时,系统创建临时变量,ch被复制到那儿,注意ch指向形参dest最
+	 * 初所指,所以返回的ch是有效的;但若ch指向函数内定义的某个局部变量,返回值就
+	 * 无效了.
+	 **/
 	return ch;
 }
 
 /* 实现类似Java中String类的equals()方法的功能 */
 int equals(const char *str1, const char *str2)
-{
-	char *ch1, *ch2;
-	ch1 = (char *)str1;
-	ch2 = (char *)str2;
-	
-	while(*ch1 == *ch2 && *ch1 && *ch2){
-		ch1++;
-		ch2++;
+{	
+	while(*str1 == *str2 && *str1 && *str2){
+		str1++;
+		str2++;
 	}
-	if(!(*ch1) && !(*ch2)) // 同时到达行尾字符
+	if(!(*str1) && !(*str2)) // 同时到达行尾字符
 		return 1;
 	else
 		return 0;
