@@ -42,17 +42,17 @@ Complex operator - (Complex &A) {
 	return Complex(-A.real, -A.image);
 }
 
-Complex operator ++ (Complex &A) {
+Complex operator ++ (Complex &A) { // 前置++
 	return Complex(A.real++, A.image);
 }
 
-Complex operator ++ (Complex &A, int) {
+Complex operator ++ (Complex &A, int) { // 后置++
 	return Complex(++A.real, A.image);
 }
 
 int main() {
 	Complex A(10, 20), B(4, 8);
-	Complex C = A + B;
+	Complex C = A + B; // "A + B"被解释为"operator + (A,B)"的函数调用
 	cout << "A = ";
 	A.display();
 	cout << "B = ";
