@@ -11,8 +11,10 @@ int main() {
 	if (rfile.is_open() && wfile.is_open()) {
 		while (!rfile.eof()) {
 			ch = rfile.get();
+			//rfile >> ch; 这回自动跳过换行符
 			cout << ch;
-			wfile.put(ch);
+			//wfile.put(ch);
+			wfile << ch;
 		}
 		rfile.close();
 		wfile.close();
