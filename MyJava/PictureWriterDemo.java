@@ -27,7 +27,7 @@ class PictureWriter{
 			for(int y = image.getMinY(); y < height; y++){
 				pixel = rgb[x][y];
 				// 获取原图x,y处的RGB
-				Color color = new Color(pixel+2);
+				Color color = new Color(pixel);
 				graph.setColor(color);
 				graph.drawLine(x, y, x+1, y+1);
 				// 绘制一个像素点
@@ -47,7 +47,7 @@ public class PictureWriterDemo{
 
 		PicEncryptionCRT pec = new PicEncryptionCRT();
 		try{
-			File pic = new File("picture.jpg");
+			File pic = new File(arg[0]);
 			BufferedImage image = ImageIO.read(pic);
 			int[][] rgb = new int[image.getWidth()][image.getHeight()];
 
