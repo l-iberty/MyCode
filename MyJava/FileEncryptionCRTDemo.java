@@ -144,8 +144,10 @@ class FileEncryptionCRT{
 
 public class FileEncryptionCRTDemo{
 	public static void main(String[] arg){
-		if(arg.length < 1)
+		if(arg.length < 1){
 			System.out.println("Usage: java <classname> <filename>");
+			return;
+		}
 
 		FileEncryptionCRT fec = new FileEncryptionCRT();
 		int[] m = {31,37,43};

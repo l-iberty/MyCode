@@ -15,8 +15,6 @@ public class PictureReader{
         try {
         	File pic = new File("picture.jpg");
             BufferedImage bi = ImageIO.read(pic);
-            //ImageIO.write(bi, "gif", new File("Info.gif"));
-            // 文件格式不能写成".gif"
             FileWriter picInfo = new FileWriter("pictureInfo.txt");
             BufferedWriter bw = new BufferedWriter(picInfo);
 
