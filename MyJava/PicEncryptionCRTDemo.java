@@ -91,19 +91,11 @@ class PicEncryptionCRT{
 		// 所有图片的尺寸都一样
 		BufferedImage outImage = new BufferedImage(width, height,
 			BufferedImage.TYPE_INT_RGB); // 用于输出图像
-		int[][][] tmpCipher = new int[m.length][width][height];
 
-		for(i = 0; i < filename.length; i++)
-			for(x = 0; x < width; x++)
-				for(y = 0; y < height; y++)
-					tmpCipher[i][x][y] = image[i].getRGB(x, y);
-					// 一张一张地读取，而不是几张同时读取
-		
 		for(x = 0; x < width; x++){
 			for(y = 0; y < height; y++){
-				for(i = 0; i < cipher.length; i++){
-					cipher[i] = tmpCipher[i][x][y];
-				}
+				for(i = 0; i < cipher.length; i++)
+					cipher[i] = image[i].getRGB(x,y);
 
 				//System.out.println("cipher: " + Arrays.toString(cipher));
 				pixel = (int)decrypt(cipher, m);
@@ -113,11 +105,9 @@ class PicEncryptionCRT{
 				graph.setColor(color);
 				graph.drawLine(x, y, x+1, y+1);
 			}
-			
 		}
 
 		ImageIO.write(outImage, "jpg", new File("decryptImage.jpg"));
-
 	}
 
 	private long decrypt(int[] a, int[] m){
