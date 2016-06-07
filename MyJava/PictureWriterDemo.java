@@ -45,7 +45,7 @@ public class PictureWriterDemo{
 			return;
 		}
 
-		PicEncryptionCRT pec = new PicEncryptionCRT();
+		PictureWriter pec = new PictureWriter();
 		try{
 			File pic = new File(arg[0]);
 			BufferedImage image = ImageIO.read(pic);
