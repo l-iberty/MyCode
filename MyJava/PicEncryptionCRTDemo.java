@@ -1,9 +1,13 @@
-/** 本代码中所用的图像处理类在读取RGB时会有误差，
-微小的误差将被解密函数的累乘急剧放大，导致无法
-恢复.然而测试时使用的RGB(255,0,0)的图像在一组特
-殊密钥的作用下不会产生误差，但不产生误差必须要
-特定的RGB和特定的密钥，但实际应用时这不可能满足
-**/
+/**	本代码中所用的图像处理类在读取RGB时会有误差，微
+  * 小的误差将被解密函数的累乘急剧放大，导致无法恢
+  * 复.然而测试时使用的RGB(255,0,0)的图像在一组特殊
+  * 密钥的作用下不会产生误差，但不产生误差必须要特
+  * 定的RGB和特定的密钥，但实际应用时这不可能满足.
+  */
+/** 使用.bmp格式可以很大程度上减小误差，但密钥的取值
+  * 也对误差的大小有影响.经反复测试，本代码使用的密
+  * 钥产生的误差最小.
+  */
 
 import java.awt.*;
 import java.io.*;
@@ -48,8 +52,8 @@ class PicEncryptionCRT{
 				}
 
 		for(i = 0; i < image.length; i++){
-			picture[i] = new File("E_" + i + "Image.jpg");
-			ImageIO.write(image[i], "jpg", picture[i]);
+			picture[i] = new File("E_" + i + "Image.bmp");
+			ImageIO.write(image[i], "bmp", picture[i]);
 		}
 
 		//检测原图的RGB
@@ -96,6 +100,8 @@ class PicEncryptionCRT{
 			for(y = 0; y < height; y++){
 				for(i = 0; i < cipher.length; i++)
 					cipher[i] = image[i].getRGB(x,y);
+		// 读取分存图片的数据时采用的方法时同时读取多张图片同一坐标的像素信息.
+		// 第3层for结束后，cipher[]中的数据即为每个原始像素信息的分存结果.
 
 				//System.out.println("cipher: " + Arrays.toString(cipher));
 				pixel = (int)decrypt(cipher, m);
@@ -106,8 +112,9 @@ class PicEncryptionCRT{
 				graph.drawLine(x, y, x+1, y+1);
 			}
 		}
+		// 3层for结束后outImage的所有像素点绘制完毕.
 
-		ImageIO.write(outImage, "jpg", new File("decryptImage.jpg"));
+		ImageIO.write(outImage, "bmp", new File("decryptImage.bmp"));
 	}
 
 	private long decrypt(int[] a, int[] m){
@@ -154,13 +161,13 @@ public class PicEncryptionCRTDemo{
 			return;
 		}
 
-		int[] m = {223,53,97,29};
+		int[] m = {5987,7919,2377,9199};
 		PicEncryptionCRT pec = new PicEncryptionCRT();
 		try{
 			File pic = new File(arg[0]);
 			BufferedImage bi = ImageIO.read(pic);
 
-			String[] filename = {"E_0Image.jpg","E_1Image.jpg","E_2Image.jpg","E_3Image.jpg"};
+			String[] filename = {"E_0Image.bmp","E_1Image.bmp","E_2Image.bmp","E_3Image.bmp"};
 			pec.fileEncrypt(bi, m);
 			pec.fileDecrypt(filename, m);
 		}catch(IOException e){
