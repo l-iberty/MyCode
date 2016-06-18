@@ -8,7 +8,7 @@ using namespace std;
 
 class A {
 public:
-	string toString() {
+	virtual string toString() {
 		return "Class A";
 	}
 };
