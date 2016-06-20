@@ -18,8 +18,8 @@ long long Fibonacci(int n) {
 	else {
 		for (int k = 2;k < n;k++) {
 			result = prev1 + prev2;
-			prev2 = prev1;
-			prev1 = result;
+			prev1 = prev2;
+			prev2 = result;
 		}
 	}
 
