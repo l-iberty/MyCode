@@ -85,7 +85,7 @@ int main()
 		printf_s("Error\n");
 		return 1;
 	}
-	if (S->next == NULL)
+	if (isEmpty(S))
 		printf_s("Empty Stack\n");
 	
 	for (i = 0; i < 5; i++) {
