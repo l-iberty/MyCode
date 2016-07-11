@@ -1,101 +1,61 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct demo* add(struct demo *head, struct demo *new, int inData);
-void display(struct demo *head);
-int size(struct demo *head);
-struct demo* findPrevious(struct demo *head, int inData);
-struct demo* delFisrt(struct demo *head);
-void delOthers(struct demo *head, int inData);
-void insert(struct demo *head, int inData, int newData);
+typedef struct demo *List;
+typedef int ElementType;
+
+List createList();
+int isEmpty(List L);
+void addElement(ElementType inData, List L);
+List findPrevious(List L, ElementType inData);
+void delFirst(List L);
+void delOthers(List L, ElementType inData);
+void display(List L);
+void disposeList(List L);
+void insert(List L, ElementType inData, ElementType newData);
 /* 将newData插入到inData位置，并将inData后移 */
 
 struct demo {
-	int data;
+	ElementType data;
 	struct demo *next;
 };
 
-int main()
-{
-	int i, inData;
-	struct demo *head, *new;
-	head = NULL;
+List createList() {
+	List L;
 
-	for (i = 10; i <= 100; i += 10) {
-		new = (struct demo*)malloc(sizeof(struct demo));
-		head = add(head, new, i);
-	}
-
-	display(head);
-	printf_s("\nThe number of linklist: %d\n", size(head));
-
-	insert(head, 30, 35);
-	display(head);
-	printf_s("\nThe number of linklist: %d\n", size(head));
-
-	printf_s("\nEnter the element needed deleting: ");
-	scanf_s("%d", &inData);
-	delOthers(head, inData);
-	printf_s("\nAfter deleting...\n");
-	display(head);
-	printf_s("\nThe number of linklist: %d\n", size(head));
-
-
-	head = delFisrt(head);
-	printf_s("\nAfter deleting the first one...\n");
-	display(head);
-	printf_s("\nThe number of linklist: %d\n", size(head));
-
-	return 0;
-}
-
-struct demo* add(struct demo *head, struct demo *new, int inData)
-{
-	struct demo *current;
-	new->data = inData;
-	new->next = NULL;
-
-	if (head == NULL) {
-		head = new;
-		return head;
-	}
-
-	current = head;
-	while (current->next != NULL)
-		current = current->next;
-
-	current->next = new;
-	return head;
-}
-
-int size(struct demo *head)
-{
-	struct demo *current;
-	int count = 0;
-
-	current = head;
-	while (current != NULL) {
-		current = current->next;
-		count++;
-	}
-
-	return count;
-}
-
-void display(struct demo *head)
-{
-	struct demo *current;
-
-	current = head;
-	while (current != NULL) {
-		printf_s("%d ", current->data);
-		current = current->next;
+	L = (List)malloc(sizeof(struct demo));
+	if (L == NULL)
+		return NULL;
+	else {
+		L->next = NULL;
+		return L;
 	}
 }
 
-struct demo* findPrevious(struct demo *head, int inData) {
-	struct demo *position;
-	position = head;
+int isEmpty(List L) {
+	return L->next == NULL;
+}
+
+void addElement(ElementType inData, List L) {
+	List newNode, current;
+
+	newNode = (List)malloc(sizeof(struct demo));
+	if (newNode == NULL)
+		printf_s("Error");
+	else {
+		current = L;
+		while (current->next != NULL)
+			current = current->next;
+
+		newNode->data = inData;
+		newNode->next = NULL;
+		current->next = newNode;
+	}
+}
+
+List findPrevious(List L, ElementType inData) {
+	List position;
+	position = L;
 
 	while (position->next != NULL && position->next->data != inData)
 		position = position->next;
@@ -103,37 +63,117 @@ struct demo* findPrevious(struct demo *head, int inData) {
 	return position;
 }
 
-struct demo* delFisrt(struct demo *head)
-{
-	struct demo *tmp;
-	tmp = head;
-	head = head->next;
-	free(tmp);
-	return head;
-}
-
-void delOthers(struct demo *head, int inData) {
-	struct demo *prev, *tmp;//tmp指向待删除元素
-	prev = findPrevious(head, inData);
-	
-	if (prev->next != NULL) {
-		tmp = prev->next;
-		prev->next = tmp->next;
+void delFirst(List L) {
+	List tmp;
+	if (!isEmpty(L)) {
+		tmp = L->next;
+		L->next = L->next->next;
 		free(tmp);
 	}
 }
 
-void insert(struct demo *head, int inData, int newData) {
-	struct demo *new, *prev, *tmp;
-	new = (struct demo*)malloc(sizeof(struct demo));
-	if (new == NULL) {
-		printf_s("Error");
-		return;
-	}
-	new->data = newData;
+void delOthers(List L, ElementType inData) {
+	List prev, current;
 
-	prev = findPrevious(head, inData);
-	tmp = prev->next;
-	prev->next = new;
-	new->next = tmp;
+	prev = findPrevious(L, inData);
+	if (prev->next == NULL)
+		printf_s("Element not Found");
+	else {
+		current = prev->next;
+		prev->next = current->next;
+		free(current);
+	}
+}
+
+void display(List L) {
+	List current;
+	if (isEmpty(L))
+		printf_s("Empty List");
+	else {
+		current = L->next;
+		while (current != NULL) {
+			printf_s("%d ", current->data);
+			current = current->next;
+		}
+	}
+}
+
+void disposeList(List L) {
+	List current;
+
+	if (isEmpty(L))
+		printf_s("Error");
+	else {
+		current = L;
+		while (current != NULL) {
+			L = L->next;
+			free(current);
+			current = L;
+		}
+	}
+}
+
+void insert(List L, ElementType inData, ElementType newData) {
+	List newNode, prev, current;
+
+	newNode = (List)malloc(sizeof(struct demo));
+	if (newNode == NULL)
+		printf_s("Error");
+	else {
+		prev = findPrevious(L, inData);
+		current = prev->next;
+		prev->next = newNode;
+		newNode->data = newData;
+		newNode->next = current;
+	}
+}
+
+int main() {
+	List L;
+	int i;
+
+	L = createList();
+	if (L == NULL) {
+		printf_s("Error");
+		return 1;
+	}
+
+	printf_s("First, is List Empty? %d\n", isEmpty(L));
+	for (i = 0; i < 5; i++)
+		addElement(i + 1, L);
+	display(L);
+
+	printf_s("\nInsert(L, 1, 0): ");
+	insert(L, 1, 0);
+	display(L);
+
+	printf_s("\nInsert(L, 3, 10): ");
+	insert(L, 3, 10);
+	display(L);
+
+	printf_s("\nInsert(L, 5, 6): ");
+	insert(L, 5, 6);
+	display(L);
+
+	printf_s("\nDelete the first: ");
+	delFirst(L);
+	display(L);
+
+	printf_s("\nDelOthers(L,10): ");
+	delOthers(L, 10);
+	display(L);
+
+	printf_s("\nDelOthers(L,5): ");
+	delOthers(L, 5);
+	display(L);
+
+	printf_s("\nDelOthers(L,1): ");
+	delOthers(L, 1);
+	display(L);
+
+	printf_s("\nDelOthers(L,0): ");
+	delOthers(L, 0);
+	display(L);
+
+	disposeList(L);
 }

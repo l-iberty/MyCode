@@ -11,6 +11,7 @@ void push(int inData, Stack S);
 void pop(Stack S);
 int top(Stack S);
 void display(Stack S);
+void disposeStack(Stack S);
 
 struct demo {
 	int data;
@@ -39,7 +40,7 @@ void push(int inData, Stack S) {
 
 	if (newElement == NULL) {
 		printf_s("Error\n");
-		return NULL;
+		return;
 	}
 	newElement->data = inData;
 	newElement->next = S->next;
@@ -73,6 +74,15 @@ void display(Stack S) {
 		printf_s("%d ", current->data);
 		current = current->next;
 	}
+}
+
+void disposeStack(Stack S) {
+	if (isEmpty(S)) {
+		free(S);
+		printf("\nStack Disposed\n");
+	}
+	else
+		printf("\nNot Empty Stack\n");
 }
 
 int main()
