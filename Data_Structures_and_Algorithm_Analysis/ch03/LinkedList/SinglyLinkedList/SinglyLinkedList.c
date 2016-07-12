@@ -2,12 +2,13 @@
 #include <stdlib.h>
 
 typedef struct demo *List;
+typedef struct demo *Position;
 typedef int ElementType;
 
 List createList();
 int isEmpty(List L);
 void addElement(ElementType inData, List L);
-List findPrevious(List L, ElementType inData);
+Position findPrevious(List L, ElementType inData);
 void delFirst(List L);
 void delOthers(List L, ElementType inData);
 void display(List L);
@@ -37,7 +38,8 @@ int isEmpty(List L) {
 }
 
 void addElement(ElementType inData, List L) {
-	List newNode, current;
+	List newNode;
+	Position current;
 
 	newNode = (List)malloc(sizeof(struct demo));
 	if (newNode == NULL)
@@ -53,8 +55,8 @@ void addElement(ElementType inData, List L) {
 	}
 }
 
-List findPrevious(List L, ElementType inData) {
-	List position;
+Position findPrevious(List L, ElementType inData) {
+	Position position;
 	position = L;
 
 	while (position->next != NULL && position->next->data != inData)
@@ -64,7 +66,7 @@ List findPrevious(List L, ElementType inData) {
 }
 
 void delFirst(List L) {
-	List tmp;
+	Position tmp;
 	if (!isEmpty(L)) {
 		tmp = L->next;
 		L->next = L->next->next;
@@ -73,7 +75,7 @@ void delFirst(List L) {
 }
 
 void delOthers(List L, ElementType inData) {
-	List prev, current;
+	Position prev, current;
 
 	prev = findPrevious(L, inData);
 	if (prev->next == NULL)
@@ -86,7 +88,7 @@ void delOthers(List L, ElementType inData) {
 }
 
 void display(List L) {
-	List current;
+	Position current;
 	if (isEmpty(L))
 		printf_s("Empty List");
 	else {
@@ -99,7 +101,7 @@ void display(List L) {
 }
 
 void disposeList(List L) {
-	List current;
+	Position current;
 
 	if (isEmpty(L))
 		printf_s("Error");
@@ -114,7 +116,8 @@ void disposeList(List L) {
 }
 
 void insert(List L, ElementType inData, ElementType newData) {
-	List newNode, prev, current;
+	List newNode;
+	Position prev, current;
 
 	newNode = (List)malloc(sizeof(struct demo));
 	if (newNode == NULL)
