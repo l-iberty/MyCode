@@ -75,7 +75,7 @@ TreeNode delete(ElementType x, TreeNode T) {
 	if (T == NULL)
 		printf_s("Element Not Found\n");
 	else if (x > T->data)
-		T->Right = delete(x, T->Left);
+		T->Right = delete(x, T->Right);
 	else if (x < T->data)
 		T->Left = delete(x, T->Left);
 	else if (T->Left && T->Right ) { /* Found element to be deleted */
