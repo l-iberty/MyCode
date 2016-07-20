@@ -91,12 +91,12 @@ void deleteMin(PriorityQueue H) {
 		if (child <= H->size && H->Arrays[child + 1] < H->Arrays[child])
 			child++;
 
-		if (child <= H->size && last >= H->Arrays[child])
+		if (child <= H->size && last > H->Arrays[child])
 			H->Arrays[i] = H->Arrays[child]; /* 用子节点替换父节点 */
 		else
 			break;
 		/* 循环结束后要用last替换i处的节点，如果i的父节点大于last将不满足条件
-		因此在用子节点替换父节点时须保证last大于等于子节点，这样，当i指向其
+		因此在用子节点替换父节点时须保证last大于子节点，这样，当i指向其
 		子节点并退出循环后，该位置被last替换，从而确保了i节点（其值等于last）
 		大于等于其父节点 */
 	}
