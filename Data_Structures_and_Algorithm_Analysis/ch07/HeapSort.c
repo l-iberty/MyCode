@@ -5,19 +5,11 @@
 static int SIZE = 15;
 
 int Arrays[15 + 1] = { MIN, 150,80,40,30,10,70,110,100,
-									20,90,60,50,120,140,130 };
+20,90,60,50,120,140,130 };
 
-void buildHeap();
 void percolateUp(int index);
 int deleteMax();
-void display();
-
-void buildHeap() {
-	int i;
-
-	for (i = SIZE / 2;i > 0;i--)
-		percolateUp(i);
-}
+void heapSort();
 
 void percolateUp(int index) {
 	int i, child, temp;
@@ -36,22 +28,6 @@ void percolateUp(int index) {
 	}
 	Arrays[i] = temp;
 }
-
-/*void percolateUp(int index) {
-	int i, child, temp;
-
-	for (i = index;i / 2 > 0;i /= 2) {
-		child = i * 2;
-		if (child <= SIZE && Arrays[child + 1] > Arrays[child])
-			child++;
-
-		if (Arrays[child] > Arrays[i]) {
-			temp = Arrays[child];
-			Arrays[child] = Arrays[i];
-			Arrays[i] = temp;
-		}
-	}
-}*/
 
 int deleteMax() {
 	int max, last, i, child;
@@ -74,25 +50,22 @@ int deleteMax() {
 	return max;
 }
 
-void display() {
+void heapSort() {
 	int i;
 
-	for (i = 1;i <= SIZE;i++)
-		printf_s("%d ", Arrays[i]);
+	for (i = SIZE / 2;i > 0;i--)
+		percolateUp(i); /* Build heap */
+
+	for (i = SIZE;i > 0;i--)
+		Arrays[i] = deleteMax();
 }
 
 int main() {
-	int i, k;
+	int i;
 
-	buildHeap();
-	display();
-
-	k = 15;
-	for (i = 1;i <= k;i++) {
-		printf_s("\n");
-		deleteMax();
-		display();
-	}
+	heapSort();
+	for (i = 1;i <= 15;i++)
+		printf_s("%d ", Arrays[i]);
 
 	return 0;
 }

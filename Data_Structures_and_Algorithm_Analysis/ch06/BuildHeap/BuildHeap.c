@@ -4,7 +4,7 @@
 #define MIN -1
 
 int Arrays[SIZE + 1] = { MIN, 150,80,40,30,10,70,110,100,
-									20,90,60,50,120,140,130 };
+20,90,60,50,120,140,130 };
 
 void buildHeap();
 void percolateDown(int index);
@@ -20,6 +20,23 @@ void buildHeap() {
 void percolateDown(int index) {
 	int i, child, temp;
 
+	temp = Arrays[index];
+	for (i = index;i * 2 <= SIZE;i = child) {
+		child = i * 2;
+		if (child <= SIZE && Arrays[child + 1] < Arrays[child])
+			child++;
+
+		if (child <= SIZE && temp > Arrays[child])
+			Arrays[i] = Arrays[child];
+		else
+			break;
+	}
+	Arrays[i] = temp;
+}
+
+/*void percolateDown(int index) {
+	int i, child, temp;
+
 	for (i = index;i * 2 <= SIZE;i = child) {
 		child = i * 2;
 		if (child <= SIZE && Arrays[child + 1] < Arrays[child])
@@ -28,10 +45,10 @@ void percolateDown(int index) {
 		if (child <= SIZE && Arrays[i] > Arrays[child]) {
 			temp = Arrays[i];
 			Arrays[i] = Arrays[child];
-			Arrays[child] = temp; 
+			Arrays[child] = temp;
 		}
 	}
-}
+}*/
 
 void display() {
 	int i;
