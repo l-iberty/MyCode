@@ -77,12 +77,14 @@ void display(Stack S) {
 }
 
 void disposeStack(Stack S) {
-	if (isEmpty(S)) {
-		free(S);
-		printf("\nStack Disposed\n");
+	Stack P, AfterP;
+
+	P = S;
+	while (P != NULL) {
+		AfterP = P->next;
+		free(P);
+		P = AfterP;
 	}
-	else
-		printf("\nNot Empty Stack\n");
 }
 
 int main()
