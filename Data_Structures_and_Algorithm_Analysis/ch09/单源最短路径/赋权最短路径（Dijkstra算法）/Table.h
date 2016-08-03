@@ -1,3 +1,5 @@
+#ifndef _TABLE_H
+#define _TABLE_H
 #include <stdio.h>
 #include <stdlib.h>
 #define true 1
@@ -57,3 +59,4 @@ void disposeTable(Table T) {
 	free(T->path);
 	free(T);
 }
+#endif _TABLE_H

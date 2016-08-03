@@ -1,3 +1,5 @@
+#ifndef _QUEUE_H
+#define _QUEUE_H
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -73,3 +75,4 @@ void disposeQueue(Queue Q) {
 		P = AfterP;
 	}
 }
+#endif

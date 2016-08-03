@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "Graph.h"
 #define true 1
 #define false 0

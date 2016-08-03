@@ -1,4 +1,5 @@
-#include <stdio.h>
+#ifndef _GRAPH_H
+#define _GRAPH_H
 #include <stdlib.h>
 
 typedef int Vertex;
@@ -80,3 +81,4 @@ void makeEmpty(Graph G) {
 	free(G->V);
 	free(G);
 }
+#endif /* _GRAPH_H */

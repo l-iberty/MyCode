@@ -1,3 +1,5 @@
+#ifndef _STACK_H
+#define _STACK_H
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -74,3 +76,4 @@ void disposeStack(Stack S) {
 int isStackEmpty(Stack S) {
 	return S->next == NULL;
 }
+#endif
