@@ -1,0 +1,62 @@
+/* p53 */
+body{
+	font-size: 10pt;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	color: black;
+	line-height: 14pt;
+	padding-left: 5pt;
+	padding-right: 5pt;
+	padding-top: 5pt;
+}
+/* body是选择符,选择所有body元素.下同 */
+
+h1{
+	font: 14pt Verdana,Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	color: red;
+	line-height: 20pt;
+}
+
+p.subHeader{
+	font-weight: bold;
+	color: #593d87; /* purple */
+}
+
+p#title{font: 14pt Verdana,Arial,Helvetica,sans-serif;}
+/* 样式ID(这和用p.title的样式类有什么区别？？) */
+
+img{
+	padding: 3pt; /* 4个方向的内边距 */
+	float: right; /* 浮动属性为向右浮动(就是让图片放在右边)*/
+}
+
+a{
+	text-decoration: none;
+	/* 元素的文本修饰：
+	none 默认
+	overline
+	underline
+	line-through
+	inherit 从父元素继承 */
+}
+
+a:link, a:visited{
+	color: #8094d6;
+}
+
+a:hover, a:active{
+	color: #FF9933;
+}
+/* css的4个定义文字链接样式的伪类:
+a:link 未访问
+a:visited 已访问
+a:hover 鼠标悬停的
+a:active 处于活动状态的 */
+
+div.footer{
+	font-size: 9pt;
+	font-style: initial;
+	line-height: 12pt;
+	text-align: center; /* 文本的水平对齐方式 */
+	padding-top: 30pt;
+}

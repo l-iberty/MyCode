@@ -1,0 +1,40 @@
+<!--内部样式单用于处理只用于一个网页的样式-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Inline Style Sheet</title>
+		<style type="text/css">
+			div.foot{
+				font-size: 9pt;
+				font-style: initial;
+				line-height: 12pt;
+				text-align: center;
+				padding-top: 30pt;
+			}
+			p#title{
+				font-size: 12pt;
+				font-family: Verdana,Arial,Helvetica,sans-serif;
+				font-style: initial;
+				font-weight: bold;
+				color: red;
+			}
+		</style>
+		<!--内部样式单(以上)-->
+	</head>
+
+	<body>
+		<p id="title">This is a sample</p>
+		<!--内联样式(以下)-->
+		<p style="color:blue">
+			The text is blue.<span style="color:orange">The text is orange.</span>
+			Now it changes into blue again.
+		</p>
+		<p>
+			default color NOW...
+		</p>
+		<div class="foot">
+			Copyright &copy 2016/8/5 by l-iberty.All rights reserved.
+		</div>
+	</body>
+</html>
+<!--
