@@ -1,0 +1,16 @@
+tr{
+	text-align: center;
+	vertical-align: middle;
+}
+
+th{
+	color: white;
+	background-color: black;
+}
+
+td{
+	font-weight: bold;
+	font-style: italic;
+	color: blue;
+	background-color: orange;
+}

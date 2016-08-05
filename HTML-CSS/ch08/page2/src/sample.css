@@ -1,0 +1,14 @@
+a:link, a:visited{
+	color: #8094d6;
+}
+
+a:hover, a:active{
+	color: #FF9933;
+}
+
+li{
+	font-weight: bold;
+	font-size: 14pt;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-style: italic;
+}
