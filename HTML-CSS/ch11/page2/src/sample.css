@@ -1,0 +1,41 @@
+body{
+	background-image: url(../image/image.gif);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+h1{
+	color:#CC99CC;
+	text-align: center;
+}
+
+/*ul{
+	text-align: center;
+	list-style-type: none;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+li{
+	background-image: url(../image/icon.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	line-height: 23pt;
+	font-size: 18pt;
+	font-weight: bold;
+	color: #FFFFFF;
+}*/
+/* 用background来设置项目图标不会弄 */
+
+ul{
+	text-align: center;
+	list-style-image: url(../image/icon.png);
+	list-style-position: inside;
+}
+
+li{
+	line-height: 23pt;
+	font-size: 18pt;
+	font-weight: bold;
+	color: #FFFFFF;
+}

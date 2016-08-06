@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Image</title>
+		<style type="text/css">
+			span{
+				font-size: 14pt;
+				font-style: italic;
+				font-family: Verdana,Arial,Helvetica,sans-serif;
+			}
+			div#mark{
+				font-size: 14pt;
+				font-style: italic;
+				font-family: Verdana,Arial,Helvetica,sans-serif;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			<img src="../image/image1.gif" alt="image1" style="vertical-align:text-top" />
+			<span>vertical-align:text-top</span>
+		</p>
+		<p>
+			<a href="../image/image2.gif">
+				<img src="../image/image2.gif" alt="image2" width="220" height="300"
+				style="vertical-align:text-bottom" />
+			</a>
+			<span>vertical-align:text-bottom</span>
+		</p>
+		<p>
+			<img src="../image/image3.gif" alt="image3" style="vertical-align:middle" />
+			<span>vertical-align:middle</span>
+		</p>
+		<p>
+			<img src="../image/image4.gif" alt="image4" style="vertical-align:baseline" />
+			<span>vertical-align:baseline</span>
+		</p>
+		<p>
+			<div style="text-align:center">
+				<span>vertical-align:text-top</span>
+				<img src="../image/image1.gif" alt="image1" style="vertical-align:text-top" />
+			</div>
+			<div id="mark">(center)</div>
+		</p>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+p.top{
+	background-color: #CCCCCC; /* CC is 80% */
+	color: #FF0000;
+	border: 1px solid #000000;
+	text-align: center;
+}
+
+p.bottom{
+	font-weight: bold;
+	font-size: 16pt;
+	text-align: right;
+	color: #9403FC;
+}
+
+div{
+	width: 300px;
+	height: 75px;
+	margin-bottom: 12px;
+	background-color: #000000;
+	color: #FFFFFF;
+	border: 2px dashed #FF0000;
+	text-align: center;
+}
+
+td{text-align: center;}
+
+blockquote{
+	background-color: bisque;
+	color: honeydew;
+	border: 4px dotted papayawhip;
+}
