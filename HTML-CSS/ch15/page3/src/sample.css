@@ -1,0 +1,23 @@
+div#d1{
+	width: 850px;
+	height: 100px;
+	border: 2px solid #000000;
+	font-weight: bold;
+}
+
+div#d2{
+	width: 200px;
+	height: 90px;
+	border: 2px solid #000000;
+	font-weight: bold;
+	overflow: scroll;
+	float: left;
+	clear: right;
+}
+
+img{
+	width: 200px;
+	height: 90px;
+	margin-left: 5px;
+	float: left;
+}
