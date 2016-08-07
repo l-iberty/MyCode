@@ -1,4 +1,6 @@
 div{
+	position: relative;
+	/*relative是默认设置;若设置为absolute,后一个元素会覆盖前一个元素*/
 	width: 250px;
 	height: 100px;
 	border: 5px solid #FFFFFF;

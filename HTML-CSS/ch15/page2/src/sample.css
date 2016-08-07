@@ -1,5 +1,5 @@
 div{
-	position: absolute;
+	position: absolute;/*Change it to 'relative' and ckeck the result.*/
 	width: 250px;
 	height: 100px;
 	border: 0px solid #FFFFFF;
