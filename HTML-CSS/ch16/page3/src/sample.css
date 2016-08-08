@@ -1,0 +1,53 @@
+#theImg{
+	width: 500px;
+	height: 375px;
+	background-image: url(../image/background.jpg);
+	background-repeat: no-repeat;
+	border: 1px solid #000000;
+}
+/* id选择器.与类似"div#theImg"不同的是:
+前者:任何元素都能应用"theImg"id的属性;
+后者:仅<div>元素能应用之. */
+
+#theImg ul{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+/* 派生id选择器.theImg内的ul元素的属性作特别处理:
+基本属性继承theImg,并派生出新的属性 */
+
+#theImg a{
+	position: absolute;
+	text-indent: -1000em;
+	/*首行缩进-1000个字符*/
+	/*目的:不让文本出现在图片上*/
+}
+/* a元素出现在theImg内 */
+
+#theImg a:hover{
+	border: 1px solid #FFFFFF;
+}
+
+#ss a{
+	top: 0px;
+	left: 5px;
+	width: 80px;
+	height: 225px;
+}
+/* 对id为ss内的a元素定位,由继承关系只,定位方式为绝对定位 */
+/* 4个属性值说明了超链接的响应区域 */
+
+#gn a{
+	top: 226px;
+	left: 15px;
+	width: 70px;
+	height: 110px;
+}
+
+#ib a{
+	top: 225px;
+	left: 85px;
+	width: 60px;
+	height: 90px;
+}

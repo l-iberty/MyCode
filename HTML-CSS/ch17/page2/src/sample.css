@@ -1,0 +1,59 @@
+body{
+	font: 12pt Verdana, Arial, Georgia, sans-serif;
+}
+
+#header{width: auto;}
+
+#logo{float: left;}
+
+#nav{
+	float: left;
+	margin: 85px 0px 0px 0px;
+	width: auto;
+	background-color: #628794;
+	border: 1px solid #000000;
+}
+
+#nav ul{
+	list-style: none;
+	display: inline;
+	/*默认为block.(此处二者效果没区别)*/
+	margin: 0px;
+	padding: 0px;
+}
+
+#nav li{
+	display: inline;
+	/*列表项之所以会自动分行是因为<li>的display的默认值为block,
+	自动换行要把竖排列表变成横排列表只需把display设置为inline.*/
+	line-height: 1.8em;
+}
+
+#nav ul li a:link, #nav ul li a:visited{
+	font-size: 10pt;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 7px 10px 7px 10px;
+	background-color: #628794;
+	color: #FFFFFF;
+}
+
+#nav ul li a:hover, #nav ul li a:active{
+	font-size: 10pt;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 7px 10px 7px 10px;
+	background-color: #C6A648;
+	color: #000000;
+}
+
+#content{
+	width: auto;
+	float: left;
+	clear: left;/*此ID标记的元素左边没东西*/
+}
+
+#content a{
+	text-decoration: none;
+	font-weight: bold;
+}

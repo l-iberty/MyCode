@@ -1,0 +1,77 @@
+body{
+	font: 12pt Georgia,Arial,Verdana,sans-serif;
+}
+
+#nav{
+	width: 150px;
+	float: left;
+	margin-top: 12px;
+	margin-right: 18px;/*表现为两个<div>之间的距离*/
+}
+
+#content{
+	width: 550px;
+	float: left;
+}
+
+#nav a{text-decoration: none;}
+
+#nav ul{
+	list-style: none;
+	margin: 12px 0px 0px 0px;
+	padding: 0px;
+}
+
+#nav li{
+	border-bottom: 1px solid #FFFFFF;
+}
+
+#nav li a:link, #nav li a:visited{
+	font-size: 10pt;
+	font-weight: bold;
+	display: block;
+	/* display属性设置元素如何显示.block表示此元素将显示为块级元素,
+	文本被放在固定大小的矩形中,该矩形即盒子模型中的CONTENT区域. */
+	padding: 3px 0px 3px 3px;
+	background-color: #628794;
+	color: #FFFFFF;
+}
+
+#nav li a:hover, #nav li a:active{
+	font-size: 10pt;
+	font-weight: bold;
+	display: block;
+	padding: 3px 0px 3px 3px;
+	background-color: #6CAC46;
+	color: #000000;
+}
+
+#nav ul ul{
+	margin: 0px;
+	padding: 0px;
+}
+
+#nav ul ul li{border-bottom: none;}
+
+#nav ul ul li a:link, #nav ul ul li a:visited{
+	font-size: 8pt;
+	font-weight: bold;
+	display: block;
+	padding: 3px 0px 3px 18px;
+	background-color: #628794;
+	color: #FFFFFF;
+}
+
+#nav ul ul li a:hover, #nav ul ul li a:active{
+	font-size: 9pt;
+	font-weight: bold;
+	display: block;
+	padding: 3px 0px 3px 18px;
+	background-color: #C6A648;
+	color: #000000;
+}
+
+#content a{
+	text-decoration: none;
+	font-weight: bold;
+}

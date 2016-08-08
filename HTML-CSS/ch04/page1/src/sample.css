@@ -24,6 +24,7 @@ p.subHeader{
 
 p#title{font: 14pt Verdana,Arial,Helvetica,sans-serif;}
 /* 样式ID(这和用p.title的样式类有什么区别？？) */
+/* id属性只能在文档中使用一次 */
 
 img{
 	padding: 3pt; /* 4个方向的内边距 */

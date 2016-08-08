@@ -1,0 +1,12 @@
+ul{
+	background-color: blue;
+	border: 1px solid black;
+	width: 100px;
+	padding-left: 40px;/*默认左填充值*/
+	margin: 40px;
+}
+
+li{
+	background-color: #CCCCCC;
+	border: 2px solid #FFFF00;
+}
