@@ -25,7 +25,7 @@ body{
 #nav li{
 	display: inline;
 	/*列表项之所以会自动分行是因为<li>的display的默认值为block,
-	自动换行要把竖排列表变成横排列表只需把display设置为inline.*/
+	要把竖排列表变成横排列表只需把display设置为inline.*/
 	line-height: 1.8em;
 }
 

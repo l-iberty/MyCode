@@ -1,0 +1,32 @@
+a{
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.tip{
+	position: relative;
+	/*relative确保链接文本自然呈现.若使用absolute,它会和正文混在一起*/
+	/*其实这么做实属多余,仅起到"确保"的作用*/
+	z-index: 1;
+}
+
+a.tip:hover{
+	z-index: 2;
+}
+
+a.tip span{
+	display: none;/*none表示此元素不会被显示*/
+}
+
+a.tip:hover span{
+	font-weight: normal;
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 25px;
+	width: 150px;
+	padding: 3px;
+	border: 1px solid #000000;
+	background-color: #DDDDDD;
+	color: #000000;
+}

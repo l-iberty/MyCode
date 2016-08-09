@@ -1,0 +1,48 @@
+<!--必须允许网页运行JavaScript脚本*-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<link rel="stylesheet" type="text/css" href="sample.css">
+	</head>
+	<body>
+		<div class="fakelink"
+			 id="show_e"
+			 onclick="this.style.display='none';
+			 /*this引用关键字本身.即ID为show_e的<div>*/
+			 /*点击当前<div>后,当前<div>显示属性被设置为不可见,然后进行一下操作:*/
+			 document.getElementById('hide_e').style.display='block';
+			 /*将ID为hide_e的元素显示为块级*/
+			 /*将ID为elevation的元素显示为行内*/
+			 document.getElementById('elevation').style.display='inline';">&raquo; Show Elevation
+		</div>
+
+		<div class="fakelink"
+			 id="hide_e"
+			 onclick="this.style.display='none';
+			 document.getElementById('show_e').style.display='block';
+			 document.getElementById('elevation').style.display='none';">&raquo; Hide Elevation
+		</div>
+
+		<div id="elevation">3,612 feet, approximately 1000 feet above the surrounding countryside.</div>
+
+		<div class="fakelink"
+			 id="show_p"
+			 onclick="this.style.display='none';
+			 document.getElementById('hide_p').style.display='block';
+			 document.getElementById('photos').style.display='inline';">&raquo; Show Photos
+		</div>
+
+		<div class="fakelink"
+			 id="hide_p"
+			 onclick="this.style.display='none';
+			 document.getElementById('show_p').style.display='block';
+			 document.getElementById('photos').style.display='none';">&raquo; Hide Photos
+		</div>
+
+		<div id="photos">
+			<img src="../image/image1.gif" alt="IMAGE#1" />
+			<img src="../image/image2.gif" alt="IMAGE#2" />
+		</div>
+	</body>
+</html>

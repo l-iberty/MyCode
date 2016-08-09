@@ -1,0 +1,41 @@
+a{
+	text-decoration: none;
+	font-weight: bold;
+	color: #7A7ABF;
+}
+
+#hide_e{
+	display: none;
+}
+
+#hide_p{
+	display: none;
+}
+
+#elevation{
+	display: none;
+}
+
+#photos{
+	display: none;
+}
+
+#show_e{
+	display: block;
+}
+
+#show_p{
+	display: block;
+}
+
+.fakelink{
+	cursor: pointer;/*cursor 属性规定要显示的光标的类型（形状）*/
+	text-decoration: none;
+	font-weight: bold;
+	color: #E03A3E;
+}
+
+img{
+	width: 150px;
+	height: 200px;
+}

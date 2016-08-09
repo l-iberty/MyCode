@@ -1,0 +1,48 @@
+#header{
+	float: left;
+	width: 100%;
+	background-color: #7152F4
+}
+
+#footer{
+	float: left;
+	width: 100%;
+	background-color: #7152F4
+}
+
+#wrapper{
+	float: left;
+	padding-left: 200px;
+	padding-right: 125px;
+	/*overflow: hidden;*/
+}
+
+#left_side{
+	position: relative;
+	float: left;
+	width: 200px;
+	background-color: #52F471;
+	right: 200px;
+	margin-left: -100%;/*这行代码的效果是如何产生的?*/
+	/*margin-bottom: -2000px;
+	padding-bottom: 2000px;*/
+}
+
+#right_side{
+	position: relative;
+	float: left;
+	width: 135px;
+	background-color: #F452D5;
+	margin-right: -100%;/*??*/
+	/*margin-bottom: -2000px;
+	padding-bottom: 2000px;*/
+}
+
+#content_area{
+	position: relative;
+	float: left;
+	background-color: #00FFFF;
+	width: 100%;
+	/*margin-bottom: -2000px;
+	padding-bottom: 2000px;*/
+}
