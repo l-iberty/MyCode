@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<link rel="stylesheet" type="text/css" href="sample.css" />
+	</head>
+	<body>
+		<form method="post" action="URL_to_script">
+			<div class="formlabel">What's your QQ?</div>
+			<div class="formfield"><input type="text" name="qq" size="50" maxlength="20" /></div>
+			<div class="formlabel">What's your QQ-password?</div>
+			<div class="formfield"><input type="password" name="password" size="50" maxlength="20" /></div>
+
+			<div class="formfield">Please check all that apply:</div>
+			<div class="formfield">
+				<input type="checkbox" name="website_response[]" value="I really like your website." checked="checked" />I really like your website.<br/>
+				<input type="checkbox" name="website_response[]" value="One of the best website" />One of the best website<br/>
+				<input type="checkbox" name="website_response[]" value="I surely wish my site looked like yours." />I surely wish my site looked like yours.<br/>
+			</div>
+
+			<div class="formlabel">Choose the one thing:</div>
+			<div class="formfield">
+				<input type="radio" name="lovebest" value="me" />That gorgeous picture of you.<br/>
+				<input type="radio" name="lovebest" value="cat" />That gorgeous picture of cats.<br/>
+				<input type="radio" name="lovebest" value="childhood" />That gorgeous picture of childhood.<br/>
+				<!--同一组单选按钮的name属性值相同-->
+			</div>
+
+			<div class="formlabel">How many copies would it sell?</div>
+			<div class="formfield">
+				<select name="sales" size="3" multiple="multiple">
+					<option value="Millions" selected="selected">Millions</option>
+					<option value="100,000+">100,000+</option>
+					<option value="Thousands">Thousands</option>
+					<option value="Very few">Very few</option>
+				</select>
+			</div>
+
+			<div class="formlabel">Free to type more praise bellow:</div>
+			<div class="formfield">
+				<textarea name="comments" rows="4" cols="55"></textarea>
+			</div>
+
+			<div style="float:left">
+				<input type="submit" value="Click here to submit" />
+				<input type="reset" value="Erase and Start Over">
+			</div>
+		</form>
+	</body>
+</html>
