@@ -1,4 +1,5 @@
-#include <stdio.h>
+#ifndef _GRAPH_H
+#define _GRAPH_H
 #include <stdlib.h>
 #define true 1
 #define false 0
@@ -86,3 +87,4 @@ void makeEmpty(Graph G) {
 	free(G->V);
 	free(G);
 }
+#endif //_GRAPH_H

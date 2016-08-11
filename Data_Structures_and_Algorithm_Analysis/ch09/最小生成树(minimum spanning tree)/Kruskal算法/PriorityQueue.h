@@ -1,3 +1,5 @@
+#ifndef _PRIORITYQUEUE_H
+#define _PRIORITYQUEUE_H
 #include <stdio.h>
 #include <stdlib.h>
 #define MINDATA -1
@@ -91,3 +93,4 @@ int isFull(PriorityQueue H) {
 int isEmpty(PriorityQueue H) {
 	return H->size == 0;
 }
+#endif //_PRIORITYQUEUE_H

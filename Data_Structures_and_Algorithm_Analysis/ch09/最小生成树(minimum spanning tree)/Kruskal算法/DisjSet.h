@@ -1,3 +1,7 @@
+#ifndef _DISJSET_H
+#define _DISJSET_H
+#include <stdlib.h>
+
 typedef int Vertex;
 typedef Vertex ElementType;
 typedef int Root;
@@ -34,3 +38,4 @@ void setUnion(DisjSet S, Root root1,Root root2){
 void disposeSet(DisjSet S){
 	free(S);
 }
+#endif //_DISJSET_H

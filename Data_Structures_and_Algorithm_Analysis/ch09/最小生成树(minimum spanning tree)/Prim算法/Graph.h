@@ -1,10 +1,11 @@
+#ifndef _GRAPH_H
+#define _GRAPH_H
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef int Vertex;
 typedef struct GraphTable *Graph;
 typedef struct ListTable *List;
-typedef int boolean;
 
 Graph initializeGraph(int NumOfVertex);
 void addVertex(Graph G, Vertex V, Vertex AdjacentToV, int Cvw);
@@ -81,3 +82,4 @@ void makeEmpty(Graph G) {
 	free(G->V);
 	free(G);
 }
+#endif //_GRAPH_H
