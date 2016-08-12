@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function _click() {
+				alert("Go to UESTC?");
+				return true;
+				/* return false;将不会链接到指定页面 */
+			}
+		</script>
+
+		<!--#1-->
+		<!--直接设置<a>元素的onclick属性
+		<div>
+			<a href="http://www.uestc.edu.cn" title="UESTC" onclick="_click()">UESTC</a>
+		</div>
+		-->
+
+		<!--#2-->
+		<div>
+			<a href="http://www.uestc.edu.com" title="UESTC">UESTC</a>
+		</div>
+		<script type="text/javascript">
+			window.document.links[0].onclick = _click;
+			/*
+			 *将链接的onclick属性与函数_click关联.
+			 *单击链接将跳转到_click的执行
+			 */
+			/*
+			 *适用于html标记元素没有定义相关的事件处理属性时
+			 */
+		</script>
+	</body>
+</html>

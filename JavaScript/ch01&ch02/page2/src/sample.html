@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			document.write("<p style=\"font-weight:bold; color:red\">This is a text from javascript");
+
+			var x = "A String";
+			console.log("x = " + x);
+			x = 100;
+			console.log("x = " + x);
+
+			alert("continue...");
+			var y;
+			console.log("y = " + y);
+			//console.log(z); ReferenceError: z is not defined.
+
+			alert("continue...");
+			var s1 = "Hello";
+			var s2 = "World";
+			console.log("s1 + s2 = " + (s1 + s2));
+
+			var a = prompt("a = ?", 20);
+			console.log("a = " + a);
+
+			console.log("7 / 9 = " + 7/9);
+
+			var array = new Array(5);// 数组对象
+			for (var i = 0; i < array.length; i++)
+				array[i] = i + 1;
+			for(index in array)
+				console.log("array[" + index + "] = " + array[index]);
+
+			var stack = [];// 数组直接量
+			stack.push("Mike");
+			stack.push("John");
+			for(index in stack)
+				console.log(stack[index]);
+			
+			var o = {x:"html", y:2, z:4}// 普通的对象
+			for(e in o)
+				console.log("o[" + e + "] = " + o[e]);
+			
+			// 多维数组的模拟
+			var count = 1;
+			var mulArray = new Array(3);
+			for(var i = 0; i < mulArray.length; i++) {
+				mulArray[i] = new Array(2);
+				for(var j = 0; j < mulArray[i].length; j++)
+					mulArray[i][j] = count++;
+			}
+			for(var i = 0; i < mulArray.length; i++)
+				for(var j = 0; j < mulArray[i].length; j++)
+					console.log(mulArray[i][j]);
+			
+		</script>
+	</body>
+</html>

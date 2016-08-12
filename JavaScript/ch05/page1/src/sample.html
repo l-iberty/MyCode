@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<style type="text/css">
+			td{text-align: center;}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+		/* Person */
+		function Person(name, age) {
+			this.name = name;
+			this.age = age;
+		}
+
+		Person.prototype.getName = function() {
+			return this.name;
+		}
+
+		Person.prototype.getAge = function() {
+			return this.age;
+		}
+
+		Person.prototype.setName = function(name) {
+			this.name = name;
+		}
+
+		Person.prototype.setAge = function(age) {
+			this.age = age;
+		}
+		/* Person */
+
+		/* Team */
+		function Team(NumOfMembers) {
+			this.members = new Array(NumOfMembers);
+		}
+
+		Team.prototype.addMember = function(num, name, age) {
+			this.members[num] = new Person(name, age);
+		}
+
+		Team.prototype.showMembers = function() {
+			var output = "<table border=\"2\" cellpadding=\"4\" cellspacing=\"2\">";
+			for (index in this.members) {
+				var name = this.members[index].getName();
+				var age = this.members[index].getAge();
+				output += "<tr><td>" + index + "</td>";
+				output += "<td>" + name + "</td>";
+				output += "<td>" + age + "</td></tr>";
+				/*
+				 * document.write("<p>" + index + ": " name + "," + age + "</p>");
+				 * 这种写法会报错，十分古怪
+				 */
+			}
+			output += "</table>";
+			document.write(output);
+		}
+		/* Team */
+
+		var person = new Person("Black", "34");
+		console.log(person.getName());
+		console.log(person.getAge());
+
+		person.setName("Mike");
+		person.setAge("12");
+		console.log(person.getName());
+		console.log(person.getAge());
+
+		var team = new Team(4);
+		team.addMember(1, "Mike", "13");
+		team.addMember(2, "Davild", "43");
+		team.addMember(3, "John", "46");
+		team.addMember(4, "Joe", "80");
+		// 不存在数组下标越界问题
+		team.showMembers();
+		</script>
+	</body>
+</html>

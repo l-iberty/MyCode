@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<style type="text/css">
+			img{
+				width: 250px;
+				height: 180px;
+			}
+		</style>
+
+		<script type="text/javascript">
+			var Images = new Array("../image/usa.jpg", "../image/canada.jpg", "../image/china.jpg", "../image/mexico.jpg");
+
+			function changeImg(thisImg) {
+				var newImgIndex = Math.round(Math.random() * 3);
+				/*
+				 *Math.random()返回0~1的随机数
+				 *Math.round(n)返回最接近n的整数
+				 *newImgIndex的值为0,1,2,3
+				 */
+
+				while (thisImg.src.indexOf(Images[newImgIndex]) != -1) {
+					/*
+					 *返回值为-1表示随机选中的图片的src和当前对象的src不同
+					 *即二者不是同一张图片；否则返回0，继续选择图片直到和
+					 *当前图片不同
+					 */
+					newImgIndex = Math.round(Math.random() * 3);
+				}
+
+				thisImg.src = Images[newImgIndex];
+			}
+		</script>
+	</head>
+	<body>
+		<img src="../image/usa.jpg" alt="USA" onclick="changeImg(this)" />
+		<img src="../image/canada.jpg" alt="Canada" onclick="changeImg(this)" />
+		<!--this指当前<img/>元素对应的window.document.images集合中的对象，如
+			window.document.images[0]表示第一个<img/>元素-->
+	</body>
+</html>

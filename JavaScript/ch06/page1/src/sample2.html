@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title#2</title>
+	</head>
+	<body>
+		<h1>Page2</h1>
+		<script type="text/javascript">
+			alert(window.history.length);
+
+			alert("Back");
+			if (window.history.length > 1)
+				window.history.back();
+			else
+				alert("Only 1 page");
+
+			alert("The width of screen: " + window.screen.width + "\n"
+				+ "The height of screen: " + window.screen.height);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function printMsg(msg) {
+				document.write("<p style=\"text-align:center\">" + msg + "</p><hr/>");
+			}
+
+			function average(arrry) {
+				var sum = 0;
+				for (var i = 0; i < arrry.length; i++)
+					sum += arrry[i];
+
+				return sum / arrry.length;
+			}
+
+			function factorial(n) {
+				if (n < 0) 
+					throw "n should be nonnegative";
+				if (n == 0)
+					return 1;
+				else
+					return n * factorial(n - 1);
+			}
+
+			var a = printMsg("Hello World!");
+			console.log(a);
+
+			var a = [23, 45,9, 33, 12];
+			console.log(average(a));
+
+			var a = prompt("Enter a:", "");
+			try {
+				var res = factorial(a);
+				console.log("a! = " + res);
+			}catch(exc){
+				alert(exc);
+			}
+			
+		</script>
+	</body>
+</html>
