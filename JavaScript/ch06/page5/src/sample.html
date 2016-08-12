@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+	</head>
+	<body>
+		<noscript>
+			<p>This website requires JavaScript to be enabled</p>
+			<p>This message is shown only when JavaScript is forbidden by your browser</p>
+		</noscript>
+		<script type="text/javascript">
+			if (window.opera)
+				console.log("Support window.opera");
+			else
+				console.log("Don\'t support window.opera");
+
+			if (document.all)
+				console.log("Support document.all");
+			else
+				console.log("Don\'t support document.all");
+
+			if (window.sidebar)
+				console.log("Support window.sidebar");
+			else
+				console.log("Don\'t support window.sidebar");
+
+			if (document.getElementById)
+				console.log("Support document.getElementById()");
+			else
+				console.log("Don\'t document.getElementById()");
+		</script>
+	</body>
+</html>
