@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+	</head>
+
+	<body>
+		<form name="form1" action="URL_to_script">
+			<select name="theDay" size="1">
+				<option value="0" selected="selected">Monday</option>
+				<option value="1">Tuesday</option>
+				<option value="2">Wednesday</option>
+				<option value="3">Thursday</option>
+				<option value="4">Friday</option>
+				<option value="5">Saturday</option>
+				<option value="6">Sunday</option>
+			</select>
+
+			<script type="text/javascript">
+				var DayElement = document.form1.theDay;
+				document.write("<br/>There are " + DayElement.length + " options<br/>");
+				for (var DayIndex = 0; DayIndex < DayElement.length; DayIndex++) {
+					document.write("Option text is ");
+					document.write(DayElement.options[DayIndex].text);//text属性是列表中显示的内容
+					document.write(" and its value is ");
+					document.write(DayElement.options[DayIndex].value);
+					document.write("<br/>");
+				}
+				/*
+				 *脚本代码要放在<select>元素后面,否则由于加载顺序的问题会提示某个变量未定义的错误
+				 */
+			</script>
+		</form>
+	</body>
+</html>

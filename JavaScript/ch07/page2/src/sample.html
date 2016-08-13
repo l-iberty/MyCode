@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript">
+			function btnCheckForm_onclick() {
+				var myForm = document.form1;
+				if (myForm.txtAge.value == "" || myForm.txtName.value == "") {
+					alert("Complete all the form");
+					if (myForm.txtAge.value == "")
+						myForm.txtAge.focus();//使元素获得焦点
+					else
+						myForm.txtName.focus();
+				}
+				else
+					alert("Thanks for completing the form " + myForm.txtName.value);
+			}
+
+			function txtAge_onblur() {
+				// onblur事件在对象失去焦点时触发
+				var txtAge = document.form1.txtAge;
+				if (isNaN(txtAge.value)) {
+					alert("Invalid Age!");
+					txtAge.focus();
+					txtAge.select();
+					alert("Invalid Age!");//选择或加亮文本框中的所有文本
+					/*
+					 *以上两行代码似乎没什么效果
+					 *只有去掉alert()才有效果
+					 */
+				}
+			}
+
+			function txtName_onchange() {
+				// 仅当文本框失去焦点时的值不同于它获得焦点时的值,才触发onchange事件
+				window.status = "Hi! " + document.form1.txtName.value;
+				// 在状态栏显示文本,可我什么都看不到
+			}
+		</script>
+
+		<style type="text/css">
+			.formlabel{
+				margin-bottom: 12px;
+				float: left;
+				clear: left;
+			}
+
+			.formfield{
+				margin-bottom: 12px;
+				float: left;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<form name="form1" action="URL_to_script">
+			<div style="font-weight:bold">Please enter the following details:</div><hr/>
+
+			<div class="formlabel">Name: </div>
+			<div class="formfield"><input type="text" name="txtName" onchange="txtName_onchange()"></div>
+			<div class="formlabel">Age: </div>
+			<div class="formfield"><input type="text" name="txtAge" size="3" maxlength="3"  onblur="txtAge_onblur()"></div>
+
+			<div style="clear:left; text-align:center"><input type="button" name="btnCheckForm" value="Check Details" onclick="btnCheckForm_onclick()"></div>
+		</form>
+	</body>
+</html>

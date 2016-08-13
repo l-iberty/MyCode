@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript">
+		function window_onload() {
+			var NumOfForms = document.forms.length;
+
+			for (var FormIndex = 0; FormIndex < NumOfForms; FormIndex++)
+				alert(document.forms[FormIndex].id);
+		}
+		</script>
+	</head>
+
+	<body onload="window_onload()">
+	<!--将事件处理属性onload与window_onload关联.加载页面时将调用window_onload()-->
+		<form id="form1" action="">
+			<p>Form #1</p>
+		</form>
+		<form id="form2" action="">
+			<p>Form #2</p>
+		</form>
+		<form id="form3" action="">
+			<p>Form #3</p>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript">
+			function btnRemove_onclick() {
+				var ItemElement = document.form1.theItems;
+				var ItemIndex = prompt("Enter the index:");
+
+				if (ItemElement.options[ItemIndex] != null) {
+					ItemElement.options[ItemIndex] = null;
+					resetValueAndText(ItemIndex);
+				}
+				else
+					alert(ItemElement.options[ItemIndex].text + "Removed");
+			}
+
+			function resetValueAndText(ItemIndex) {
+				var ItemElement = document.form1.theItems;
+				for (var P = ItemIndex; P < ItemElement.length; P++) {
+					var newValue = parseInt(P) + 1;
+					ItemElement.options[P].text = "item" + newValue;
+				}
+			}
+
+			function btnAdd_onclick() {
+				var ItemElement = document.form1.theItems;
+				var lastIndex = ItemElement.length;
+				var lastItem = parseInt(lastIndex + 1);
+				ItemElement.options[lastIndex] = new Option("item" + lastItem, lastIndex);
+				//第一个参数是要显示的文本,第二个参数是该选项的value属性值
+				for (var i = 0; i < ItemElement.length; i++)
+					console.log(ItemElement.options[i].value);
+			}
+		</script>
+	</head>
+
+	<body>
+		<form name="form1" action="URL_to_script">
+			<select name="theItems" size="1" onchange="alert('change item')">
+			<!--onchange将在选项发生变化时被触发-->
+				<option value="0" selected="selected">item1</option>
+				<option value="1" onclick="alert('item2 selected')">item2</option>
+				<option value="2">item3</option>
+				<option value="3">item4</option>
+				<option value="4">item5</option>
+				<option value="5">item6</option>
+				<option value="6">item7</option>
+			</select>
+
+			<div style="clear:left; margin-top:10px">
+				<div style="float:left"><input type="button" name="removeItem" value="Remove Item"
+						onclick="btnRemove_onclick()"></div>
+				<div style="float:left"><input type="button" name="addItem" value="Add Item"
+						onclick="btnAdd_onclick()"></div>
+			</div>
+			
+		</form>
+	</body>
+</html>

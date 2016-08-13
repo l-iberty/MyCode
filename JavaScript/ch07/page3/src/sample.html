@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript">
+		var radCpuSpeedIndex = 0
+		function radCPUSpeed_onclick(radIndex) {
+			var returnValue = true;
+			if (radIndex == 1) {
+				returnValue = false;
+				/*
+				 *4.8 GHz处理器不可用.提示错误,并返回 false 以重置选项
+				 */
+				alert("Sorry that processor speed is currently unavialable");
+				document.form1.radCPUSpeed[radIndex].checked = true;
+				/*
+				 *复选框对象的checked属性:
+				 *true: 当前选项被选中
+				 *false: 未被选中
+				 */
+			}
+			else
+				radCpuSpeedIndex = radIndex;
+
+			return returnValue;
+		}
+
+		function btnCheck_onclick() {
+			var controlIndex;
+			var element;
+			var NumOfControls = document.form1.length;//表单对象中的元素(控件)个数
+			var compSpec = "Your chosen processor speed is ";
+
+			compSpec = compSpec + document.form1.radCPUSpeed[radCpuSpeedIndex].value;
+			/*添加处理器信息*/
+			compSpec = compSpec + "\nWith following additional components\n";
+
+			for (controlIndex = 0; controlIndex < NumOfControls; controlIndex++) {
+				element = document.form1[controlIndex];
+				if (element.type == "checkbox") {
+					if (element.checked == true)
+						compSpec = compSpec + element.value + "\n";
+				}
+			}
+			/*
+			 *遍历Form对象的所有元素,选择其中的复选框元素(checkbox),将被选中
+			 *的 value 添加到字符串compSpec中
+			 */
+			alert(compSpec);
+		}
+		</script>
+	</head>
+
+	<body>
+		<form name="form1" action="URL_to_script">
+		<!--单选按钮中的name是最后发送到脚本处理程序的变量的名称,
+		    变量值即为value;复选框类似,只是变量是一个数组-->
+			<p>Tick all of the components you want included on your computer</p>
+			<table>
+				<tr>
+					<td><input type="checkbox" name="chkDVD" value="DVD-ROM">DVD-ROM</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="chkCD" value="CD-ROM">CD-ROM</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="chkZip" value="Zip Drive">Zip Drive</td>
+				</tr>
+			</table>
+			<hr/>
+			<p>Select the processor speed you require</p>
+			<table>
+				<tr>
+					<td><input type="radio" name="radCPUSpeed" checked="checked"
+						value="3.8 GHz" onclick="return radCPUSpeed_onclick(0)">3.8 GHz</td>
+					<td><input type="radio" name="radCPUSpeed" value="4.8 GHz"
+						onclick="return radCPUSpeed_onclick(1)">4.8 GHz</td>
+					<!--return false. 并将被选中的按钮重置(缺少 "return" 将不会完成重置)-->
+					<td><input type="radio" name="radCPUSpeed" value="6 GHz"
+						onclick="return radCPUSpeed_onclick(2)">6 GHz</td>
+					<!--同一组单选按钮name相同.radCPUSpeed相当于数组名,能用[]访问每个元素-->
+				</tr>
+			</table>
+			<input type="button" name="btnCheck" value="Check Form" onclick="btnCheck_onclick()" />
+		</form>
+	</body>
+</html>
