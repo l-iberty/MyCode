@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sample</title>
+		<script type="text/javascript">
+			var newWindow;
+			function btnOpenWin() {
+				newWindow = window.open("http://www.uestc.edu.cn", "UESCTPage", "width=300,height=280");
+			}
+
+			function btnTurnBgColor() {
+				if (typeof(newWindow) != "undefined")
+					newWindow.document.bgColor = "red";
+				/*
+				 *两个页面来自不同服务器.根据同源策略,在一个页面
+				 *中无法访问另一个页面的document对象,因此UESTC主
+				 *页不会被篡改,该脚本无效
+				 */
+				else
+					alert("undefined Error");
+			}
+		</script>
+	</head>
+	<body>
+		<form name="form1" action="">
+			<input type="button" name="linkToUESTC" value="Link to UESTC"
+				onclick="btnOpenWin()" />
+			<input type="button" name="turnBgColor" value="Turn the bgColor"
+				onclick="btnTurnBgColor()" />
+		</form>
+	</body>
+</html>

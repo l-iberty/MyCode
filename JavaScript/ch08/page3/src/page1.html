@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Page1</title>
+		<script type="text/javascript">
+			function btnShowVisited_onclick() {
+				document.form1.txtaPagesVisited.value = window.top.returnPagesVisited();
+			}
+
+			function setFrameAndPageControls(linkIndex) {
+				var formObj = window.parent.parent.frameMenu.document.form1;
+				formObj.choosePage.selectedIndex = linkIndex;
+
+				if (window.parent.frameTop == window.self)//window.self返回窗口自身的只读引用
+					formObj.radFrame[0].checked = true;
+				else
+					formObj.radFrame[1].checked = true;
+				/*
+				 *page1.html可能被载入到frameTop或frameBottom框架中
+				 *若被载入到frameTop框架，则 window.parent.frameTop
+				 *与page1.html属于同一个window对象，将Top按钮设置为
+				 *被选中；若被加载到frameBottom中，二者不属于同一个
+				 *window对象，将Bottom按钮设置为被选中
+				 */
+			}
+		</script>
+	</head>
+	<body onload="window.top.addPage(window.location.href)">
+		<h1>Page1</h1>
+		<p>
+			<a href="page1.html" name="page1Link" onclick="setFrameAndPageControls(0)">Page 1</a>
+			<a href="page2.html" name="page2Link" onclick="setFrameAndPageControls(1)">Page 2</a>
+			<a href="page3.html" name="page3Link" onclick="setFrameAndPageControls(2)">Page 3</a>
+			<a href="page4.html" name="page4Link" onclick="setFrameAndPageControls(3)">Page 4</a>
+		</p>
+		<form name="form1" action="">
+			<textarea rows="10" cols="35" name="txtaPagesVisited"></textarea>
+			<br/>
+			<input type="button" name="btnShowVisited" value="List Page Visited" onclick="btnShowVisited_onclick()">
+		</form>
+	</body>
+</html>

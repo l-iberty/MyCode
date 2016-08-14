@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Page1</title>
+		<script type="text/javascript">
+			function btnGetText_onclick() {
+				document.form1.text1.value = window.opener.document.form1.text1.value;
+				//window.opener返回对当前窗口的源窗口的引用
+			}
+		</script>
+	</head>
+	<body>
+		<form name="form1" action="">
+			<p>Opener window's text</p>
+			<input type="text" name="text1" />
+			<script type="text/javascript">
+					document.form1.text1.focus();
+			</script>
+			<input type="button" name="btnGetText" value="Get Text" onclick="btnGetText_onclick()" />
+		</form>
+	</body>
+</html>

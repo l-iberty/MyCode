@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript">
+			var newWindow;
+			function btnOpenWin_onclick() {
+				var winTop = (window.screen.height / 2) - 125;
+				var winLeft = (window.screen.width / 2) - 125;
+				/*
+				 *window对象的screen属性包含屏幕的相关信息
+				 */
+				var windowFeatures = "width=250,height=250,";
+				windowFeatures = windowFeatures + "left=" + winLeft + ",";
+				windowFeatures = windowFeatures + "top=" + winTop;
+				newWindow = window.open("new_page.html", "myWindow", windowFeatures);
+				//newWindow引用新打开的窗口的window对象
+			}
+
+			function btnGetText_onclick() {
+				if (typeof(newWindow) == "undefined" || newWindow.closed == true)
+					//新窗口未创建或已创建但处于关闭状态
+					/*
+					 *typeof(x)返回"undefined"的两种情形:
+					 *x未用var定义;
+					 *x用var定义但未赋值
+					 */
+					alert("No window is open");
+				else
+					document.form1.text1.value = newWindow.document.form1.text1.value;
+			}
+
+			function window_onunload() {
+				if (typeof(newWindow) != "undefined" && newWindow.closed == false)
+					newWindow.close();
+				/*
+				 *如果新窗口已经定义并且处于打开状态，就将其关闭
+				 *从而在源窗口关闭后newWindow窗口也被关闭
+				 */
+			}
+		</script>
+	</head>
+	<body onunload="window_onunload()">
+		<form name="form1" action="">
+			<input type="button" name="btnOpenWin" value="Open newWindow" onclick="btnOpenWin_onclick()" />
+			<p>
+				newWindow's Text:<br/>
+				<input type="text" name="text1" />
+				<input type="button" name="btnGetText" value="Get Text" onclick="btnGetText_onclick()" />
+			</p>
+		</form>
+	</body>
+</html>

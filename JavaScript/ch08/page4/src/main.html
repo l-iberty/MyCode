@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<style type="text/css">
+			img{
+				width: 180px;
+				height: 120px;
+				border: 1px solid #000000;
+				cursor: pointer;
+				/* cursor属性设置光标样式.pointer-手型光标 */
+			}
+		</style>
+
+		<script type="text/javascript">
+			var detailsWindow;
+			function showDetails(bookURL) {
+				detailsWindow = window.open(bookURL, "bookDetails", "width=400px,height=350px");
+				/*
+				 *参数一: 新窗口中打开的页面的URL
+				 *参数二: 新窗口的名称,用于超链接和窗体等的target属性
+				 *参数三: 窗口的各种属性值设置
+				 */
+				detailsWindow.focus();
+				/*
+				 *把焦点设置到现有窗口上——否则多次单击主窗
+				 *口同一图像时,新的窗口就会出现在现有窗口后
+				 */
+			}
+		</script>
+	</head>
+	<body>
+		<h2>Online Book Buyer</h2>
+		<p>Click any of images below for more details</p>
+
+		<h4>Professional Ajax</h4>
+		<p>
+			<img src="../image/pro_ajax.jpg" alt="Professional Ajax"
+				onclick="showDetails('pro_ajax_details.html')"/>
+		</p>
+		<h4>Professional JavaScript</h4>
+		<p>
+			<img src="../image/pro_js.jpg" alt="Professional JavaScript"
+				onclick="showDetails('pro_js.html')"/>
+		</p>
+	</body>
+</html>

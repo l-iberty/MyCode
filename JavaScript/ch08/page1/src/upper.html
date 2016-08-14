@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Upper</title>
+		<script type="text/javascript">
+			function window_onload() {
+				alert("The name of the upper frame's window object is " + window.name);
+				/* 显示index.html框架中为作为框架页面的该页面设置的name属性值*/
+				alert("The location of upperWindow's parent is " + window.parent.location.href);
+				/* 显示index.html的绝对路径*/
+			}
+		</script>
+	</head>
+	<body onload="window_onload()">
+		<h1>Upper Frame</h1>
+	</body>
+</html>

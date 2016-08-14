@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Index Page</title>
+		<script type="text/javascript">
+			var pagesVisited = new Array();
+			function returnPagesVisited() {
+				var msg = "So far you have visited the following pages\n";
+				var NumOfPagesVisited = pagesVisited.length;
+
+				for (var pagesVisitedIndex = 0; pagesVisitedIndex < NumOfPagesVisited; pagesVisitedIndex++) {
+					msg = msg + pagesVisited[pagesVisitedIndex] + "\n";
+				}
+				
+				return msg;
+			}
+
+			function addPage(fileName) {
+				var fileNameStart = fileName.lastIndexOf("/") + 1;
+				fileName = fileName.substr(fileNameStart);
+				pagesVisited[pagesVisited.length] = fileName;
+			}
+		</script>
+	</head>
+
+	<frameset cols="50%, *">
+		<frame src="page1.html" name="fraLeft" />
+		<frame src="page2.html" name="fraRight" />
+	</frameset>
+</html>

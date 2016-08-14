@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Menu</title>
+		<script type="text/javascript">
+			function choosePage_onchange() {
+				var choosePage = document.form1.choosePage;
+				var windowObj;
+
+				if (document.form1.radFrame[0].checked == true)
+					windowObj = window.parent.frameMain.frameTop;
+				else
+					windowObj = window.parent.frameMain.frameBottom;
+
+				windowObj.location.href = choosePage.options[choosePage.selectedIndex].value;
+			}
+		</script>
+	</head>
+	<body>
+		<form name="form1" action="">
+			<p>Select frame</p>
+			<input type="radio" name="radFrame" checked="checked" />Top
+			<input type="radio" name="radFrame" />Bottom
+			<br/>
+			<br/>
+			<select name="choosePage" onchange="choosePage_onchange()">
+				<option value="page1.html">Page 1</option>
+				<option value="page2.html">Page 2</option>
+				<option value="page3.html">Page 3</option>
+				<option value="page4.html">Page 4</option>
+			</select>
+		</form>		
+	</body>
+</html>
