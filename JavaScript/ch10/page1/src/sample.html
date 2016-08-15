@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sample</title>
+		<script type="text/javascript">
+			var localTime = new Date();
+			var resultsHTML = "<p>UTC Time is " + localTime.toUTCString() + "</p>";
+			resultsHTML += "<p>Time Zone Offset is " + localTime.getTimezoneOffset() + "</p>";
+			resultsHTML += "<p>Using toLocaleTimeString() gives: " + localTime.toLocaleTimeString() + "</p>";
+			resultsHTML += "<p>Using toTimeString() gives: " + localTime.toTimeString() + "</p>";
+			resultsHTML += "<p>Using toLocaleDateString() gives " + localTime.toLocaleDateString() + "</p>";
+			resultsHTML += "<p>Using toDataString() gives: " + localTime.toDateString() + "</p>";
+
+			document.write(resultsHTML);
+		</script>
+	</head>
+	<body>
+		<form name="form1" action="">
+			
+		</form>
+	</body>
+</html>

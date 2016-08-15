@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sample</title>
+		<style type="text/css">
+			img{
+				width: 300px;
+				height: 180px;
+			}
+		</style>
+		<script type="text/javascript">
+			var currentImgNumber = 1;
+			var NumOfImgs = 3;
+			function window_onload() {
+				setTimeout("switchImg()", 1);
+			}
+
+			function switchImg() {
+				document.imgFlag.src = "../image/FlagImg" + (currentImgNumber++) + ".jpg";
+				if (currentImgNumber <= NumOfImgs)
+					setTimeout("switchImg()", 1);
+				else{
+					currentImgNumber = 1;
+					setTimeout("switchImg()", 1);
+				}
+				//3张图片以千分之一秒的间隔交替出现
+			}
+		</script>
+	</head>
+	<body onload="window_onload()">
+		<img src="../image/FlagImg1.jpg" alt="FlagImg" name="imgFlag" />
+	</body>
+</html>

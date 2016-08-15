@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sample</title>
+		<script type="text/javascript">
+			var timerID;
+			function window_onload() {
+				timerID = window.setTimeout("alert('Times Up')", 30000);//30 seconds
+			}
+
+			function stopTimer_onclick(timerID) {
+				clearTimeout(timerID);
+				alert("Timer has been cleared");
+			}
+		</script>
+	</head>
+	<body onload="window_onload()">
+		<form name="form1" action="">
+			<input type="button" name="btnStopTimer" value="Stop Timer"
+				onclick="stopTimer_onclick()">
+		</form>
+	</body>
+</html>
