@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Test Cookie</title>
+		<script type="text/javascript">
+			var lastUpdated = new Date("28 Dec 2020");
+
+			function setCookie(cookieName, cookieValue, cookiePath, cookieExpires) {
+				cookieValue = escape(cookieValue);
+
+				if (cookieExpires == "") {
+					var nowDate = new Date();
+					nowDate.setMonth(nowDate.getMonth() + 6);
+					cookieExpires = nowDate.toGMTString();
+				}
+
+				if (cookiePath != "") {
+					cookiePath = ";Path=" + cookiePath;
+				}
+
+				document.cookie = cookieName + "=" + cookieValue + ";expires=" + cookieExpires + cookiePath;
+			}
+
+			function getCookieValue(cookieName) {
+				var cookieValue = document.cookie;
+				var cookieStartsAt = cookieValue.indexOf(cookieName);
+
+				if (cookieStartsAt == -1) {
+					cookieValue = null;
+				}
+				else {
+					cookieStartsAt = cookieValue.indexOf("=", cookieStartsAt) + 1;
+					var cookieEndsAt = cookieValue.indexOf(";", cookieStartsAt);
+
+					if (cookieEndsAt == -1)
+						cookieEndsAt = cookieValue.length;
+					// 比如cookieValue = "Name=Bob",然后就没别的内容了
+
+					cookieValue = unescape(cookieValue.substring(cookieStartsAt, cookieEndsAt));
+				}
+
+				return cookieValue;
+			}
+
+			function delCookie(cookieName) {
+				setCookie(cookieName, "", "", "1 June 1900");
+				// 把expires设为过去的时间从而实现删除
+			}
+
+			function testCookie() {
+				setCookie("TestCookie", "yes", "", "");
+				if (getCookieValue("TestCookie") == null)
+					alert("Cookies are forbidden");
+				else {
+					alert("Cookies are available");
+					delCookie("TestCookie");
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			testCookie();
+		</script>
+	</body>
+</html>

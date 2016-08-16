@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sample</title>
+		<script type="text/javascript">
+			function setCookie(cookieName, cookieValue, cookiePath, cookieExpires) {
+				cookieValue = escape(cookieValue);
+				/*
+				 *escape()/unescape()用于非ASCII字符的编码和解码,例如中文
+				 *本例中" "空格字符被编码为%20
+				 */
+
+				if (cookieExpires == "") {
+					var nowDate = new Date();
+					nowDate.setMonth(nowDate.getMonth() + 6);
+					cookieExpires = nowDate.toGMTString();
+				}
+
+				if (cookiePath != "") {
+					cookiePath = ";Path=" + cookiePath;
+				}
+
+				document.cookie = cookieName + "=" + cookieValue + ";expires=" + cookieExpires + cookiePath;
+			}
+
+			function getCookieValue(cookieName) {
+				var cookieValue = document.cookie;
+				var cookieStartsAt = cookieValue.indexOf(cookieName);
+
+				if (cookieStartsAt == -1) {
+					cookieValue = null;
+				}
+				else {
+					cookieStartsAt = cookieValue.indexOf("=", cookieStartsAt) + 1;
+					var cookieEndsAt = cookieValue.indexOf(";", cookieStartsAt);
+
+					if (cookieEndsAt == -1)
+						cookieEndsAt = cookieValue.length;
+					// 比如cookieValue = "Name=Bob",然后就没别的内容了
+
+					cookieValue = unescape(cookieValue.substring(cookieStartsAt, cookieEndsAt));
+				}
+
+				return cookieValue;
+			}
+
+			function delCookie(cookieName) {
+				setCookie(cookieName, "", "", "1 June 1900");
+				// 把expires设为过去的时间从而实现删除
+			}
+			
+			setCookie("Name", "Bob", "", "");
+			setCookie("Age", "101", "", "");
+			setCookie("FirstVisit", "16 August 2016", "", "");
+			alert(document.cookie);
+
+			alert(getCookieValue("Name"));
+			alert(getCookieValue("Age"));
+			alert(getCookieValue("FirstVisit"));
+
+			delCookie("Name");
+			delCookie("Age");
+			delCookie("FirstVisit");
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
