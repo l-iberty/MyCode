@@ -1,0 +1,89 @@
+<!--在IE中的事件处理-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM</title>
+		<script type="text/javascript">
+			function createDocument() {
+				var xmlDoc;
+
+				if (window.ActiveXObject) {
+					// IE
+					var versions = ["Msxml2.DOMDocument.6.0", "Msxml2.DOMDocument.3.0"];
+
+					for (var i = 0; i < versions.length; i++) {
+						try {
+							xmlDoc = new ActiveXObject(versions[i]);
+							// 创建失败流转到catch
+							return xmlDoc;
+						}catch(error) {
+							// do nothing
+						}
+					}
+				}
+				else if (document.implementation && document.implementation.createDocument) {
+					// DOM
+					xmlDoc = document.implementation.createDocument("", "", null);
+					return xmlDoc;
+				}
+
+				return null;
+			}
+
+			var xmlDoc = createDocument();
+			xmlDoc.load("motd.xml");
+
+			function displayDogs() {
+				var dogNodes = xmlDoc.getElementsByTagName("dog");
+
+				var table = document.createElement("table");
+				table.setAttribute("cellpadding", 5);
+				table.setAttribute("width", "100%");
+				table.setAttribute("border", "1px");
+
+				// 创建表格中的<tr/>元素
+				var tableRow = new Array(dogNodes.length + 1);
+				for (var i = 0; i < tableRow.length; i++) {
+					tableRow[i] = document.createElement("tr");
+					tableRow[i].setAttribute("align", "center");
+				}
+
+				// 使用元素名称作列标题,即表头的内容,一共5项
+				for (var i = 0; i < dogNodes[0].childNodes.length; i++) {
+					var currentNode = dogNodes[0].childNodes[i];
+
+					if (currentNode.nodeType == 1) {
+						// 支持DOM的浏览器把元素之间的空白视作一个子节点,nodeType为3   
+						var tableHeader = document.createElement("th");
+						var textData = document.createTextNode(currentNode.nodeName);
+						tableHeader.appendChild(textData);
+						tableRow[0].appendChild(tableHeader);
+					}
+				}
+
+				for (var i = 0; i < dogNodes.length; i++) {
+					for (var j = 0; j < dogNodes[i].childNodes.length; j++) {
+						var currentNode = dogNodes[i].childNodes[j];
+
+						if (currentNode.nodeType == 1) {
+							var tableData = document.createElement("td");
+							var textData = document.createTextNode(currentNode.firstChild.nodeValue);
+
+							tableData.appendChild(textData);
+							tableRow[i+1].appendChild(tableData);
+						}
+					}
+				}
+
+				for (var i = 0; i < tableRow.length; i++) {
+					table.appendChild(tableRow[i]);
+				}
+
+				document.body.appendChild(table);
+			}
+		</script>
+	</head>
+	<body>
+		<a href="javascript: displayDogs()">Display Dogs</a>
+	</body>
+</html>

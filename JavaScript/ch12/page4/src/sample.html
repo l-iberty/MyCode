@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM</title>
+	</head>
+	<body>
+		<h1 id="h1">Heading</h1>
+		<p id="p1">Some Text</p>
+		<script type="text/javascript">
+			/*从<p/>导航到<h1/>*/
+			var pElement = document.getElementById("p1");
+			pElement.style.color = "red";
+
+			var hElement;
+			if (pElement.previousSibling.nodeType == 1) {
+				hElement = pElement.previousSibling;
+			}
+			else {
+				hElement = pElement.previousSibling.previousSibling;
+			}
+			hElement.style.color = "blue";
+
+			alert(pElement.previousSibling.tagName);//undefined
+			alert(pElement.previousSibling.previousSibling.tagName);//h1
+		</script>
+	</body>
+</html>

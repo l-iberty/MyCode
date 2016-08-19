@@ -1,0 +1,40 @@
+<!--在IE中的事件处理-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM</title>
+		<style type="text/css">
+			.underline{
+				color: red;
+				text-decoration: underline;
+			}
+		</style>
+		<script type="text/javascript">
+			// 在IE中event对象是全局对象window的一个属性,其名称唯一,不能用e,evt之类的代替
+			function handleEvent() {
+				if (event.srcElement.tagName == "P") { //P大写
+					if (event.type == "mouseover")
+						event.srcElement.className = "underline";
+					if (event.type == "mouseout")
+						event.srcElement.className = "";
+				}
+				// srcElement:获取引发事件的元素对象
+
+				if (event.type == "click") {
+					// type属性:事件名称
+					alert("You clicked the mouse button at the X:" + event.clientX + "and Y:" + event.clientY);
+					//这是在浏览器窗口中的坐标.screenX/screenY是相对屏幕的坐标
+				}
+			}
+
+			document.onmouseover = handleEvent;
+			document.onmouseout = handleEvent;
+			document.onclick = handleEvent;
+		</script>
+	</head>
+	<body>
+		<p>Paragraph 1</p>
+		<p>Paragraph 2</p>
+		<p>Paragraph 3</p>
+	</body>
+</html>

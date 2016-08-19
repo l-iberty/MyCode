@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM</title>
+		<script type="text/javascript">
+			var tdElement = document.getElementsByTagName('td');
+			var colorArray = new Array("red", "blue", "yellow", "lime", "orange", "teal");
+
+			function changeColor() {
+				for (var i = 0; i < tdElement.length; i++)
+					tdElement[i].style.color = colorArray[i];
+			}
+
+			function changeBgColor() {
+				for (var i = 0; i < tdElement.length; i++)
+					tdElement.item(i).bgColor = colorArray[i];
+			}
+		</script>
+	</head>
+	<body>
+		<table border="1">
+			<tr>
+				<td>Cell 1</td>
+				<td>Cell 2</td>
+				<td>Cell 3</td>
+			</tr>
+			<tr>
+				<td>Cell 4</td>
+				<td>Cell 5</td>
+				<td>Cell 6</td>
+			</tr>
+		</table>
+		<form>
+			<div style="margin-top:12px">
+				<input type="button" name="chgColor" value="Change <td/> Color"
+					onclick="changeColor()" />
+				<input type="button" name="chgBgColor" value="Change <td/> BgColor"
+					onclick="changeBgColor()" />	
+			</div>
+		</form>
+	</body>
+</html>

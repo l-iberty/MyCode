@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM</title>
+		<style type="text/css">
+			#divAdvert{
+				font: 12pt "Arial";
+			}
+		</style>
+		<script type="text/javascript">
+			function divAdvert_onMouseOver() {
+				var divAdvert = document.getElementById("divAdvert");
+				divAdvert.style.fontStyle = "italic";
+				divAdvert.style.textDecoration = "underline";
+				divAdvert.style.cursor = "pointer";
+			}
+
+			function divAdvert_onMouseOut() {
+				var divAdvert = document.getElementById("divAdvert");
+				divAdvert.style.fontStyle = "normal";
+				divAdvert.style.textDecoration = "none";
+			}
+		</script>
+	</head>
+	<body>
+		<div id="divAdvert" onmouseover="divAdvert_onMouseOver()"
+			onmouseout="divAdvert_onMouseOut()">
+			Here is an advertisement.
+		</div>
+	</body>
+</html>

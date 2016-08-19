@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM</title>
+		<script type="text/javascript">
+			var container = document.documentElement;
+			// documentElement属性返回对文档最外层元素的引用(即根元素,如<html/>)
+			alert(container.tagName);//Element对象的tagName属性返回元素的标记名称
+		</script>
+	</head>
+	<body>
+		<p id="p1">Some Text</p>
+		<script type="text/javascript">
+			var pElement = document.getElementById("p1");
+			pElement.setAttribute("align", "center");
+			alert(pElement.getAttribute("align"));
+			pElement.removeAttribute("align");
+			// text-align不行,只能是align
+		</script>
+	</body>
+</html>

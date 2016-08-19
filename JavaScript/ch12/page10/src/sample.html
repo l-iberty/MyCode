@@ -1,0 +1,39 @@
+<!--DOM事件模型-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM</title>
+		<style type="text/css">
+			.underline{
+				color: red;
+				text-decoration: underline;
+			}
+		</style>
+		<script type="text/javascript">
+			function handleEvent(e) {
+				if (e.target.tagName == "P") { //P大写
+					if (e.type == "mouseover")
+						e.target.className = "underline";
+					if (e.type == "mouseout")
+						e.target.className = "";
+				}
+				// Event对象的target属性表示引发事件的元素
+
+				if (e.type == "click") {
+					// type属性:事件名称
+					alert("You clicked the mouse button at the X:" + e.clientX + "and Y:" + e.clientY);
+					//这是在浏览器窗口中的坐标.screenX/screenY是相对屏幕的坐标
+				}
+			}
+
+			document.onmouseover = handleEvent;
+			document.onmouseout = handleEvent;
+			document.onclick = handleEvent;
+		</script>
+	</head>
+	<body>
+		<p>Paragraph 1</p>
+		<p>Paragraph 2</p>
+		<p>Paragraph 3</p>
+	</body>
+</html>

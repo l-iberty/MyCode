@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM</title>
+		<style type="text/css">
+			.defaultStyle{
+				font: normal 12pt "Arial";
+				text-decoration: none;
+			}
+			.newStyle{
+				font: italic 12pt "Arial";
+				text-decoration: underline;
+			}
+		</style>
+		<script type="text/javascript">
+			function divAdvert_onMouseOver() {
+				var divAdvert = document.getElementById("divAdvert");
+				divAdvert.className = "newStyle";
+			}
+
+			function divAdvert_onMouseOut() {
+				var divAdvert = document.getElementById("divAdvert");
+				divAdvert.className = "defualtStyle";
+			}
+		</script>
+	</head>
+	<body>
+		<div id="divAdvert" class="defualtStyle" onmouseover="divAdvert_onMouseOver()"
+			onmouseout="divAdvert_onMouseOut()">
+			Here is an advertisement.
+		</div>
+	</body>
+</html>

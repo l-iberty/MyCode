@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM</title>
+		<style type="text/css">
+			#divBox{
+				position: absolute;
+				background-color: silver;
+				width: 150px;
+				height: 150px;
+			}
+			input{
+				width: 100px;
+			}
+		</style>
+		<script type="text/javascript">
+			function moveBox() {
+				var divBox = document.getElementById("divBox");
+				var inputLeft = document.getElementById("inputLeft");
+				var inputTop = document.getElementById("inputTop");
+
+				divBox.style.left = parseInt(inputLeft.value) + "px";
+				divBox.style.top = parseInt(inputTop.value) + "px";
+			}
+		</script>
+	</head>
+	<body>
+		<div id="divBox">
+			<form id="formBoxController" action="">
+				<p>Left:<input type="text" id="inputLeft" /></p>
+				<script type="text/javascript">
+					document.getElementById("inputLeft").focus();
+				</script>
+				<p>Top:<input type="text" id="inputTop" /></p>
+				<p><input type="button" value="Move The Box" onclick="moveBox()" /></p>
+			</form>
+		</div>
+	</body>
+</html>

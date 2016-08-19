@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM</title>
+		<style type="text/css">
+			#divElem{
+				position: absolute;
+				font-size: 20px;
+				top: 100px;
+				left: 100px;
+			}
+		</style>
+		<script type="text/javascript">
+			function doAnimation() {
+				var divElem = document.getElementById("divElem");
+				var currLeft = divElem.offsetLeft;
+				var currTop = divElem.offsetTop;
+				
+				if (currTop == 100) { // go right
+					currLeft++;
+					divElem.style.left = currLeft + "px";
+				}
+				if (currLeft == 400) { // go down
+					currTop++;
+					divElem.style.top = currTop + "px";
+				}
+				if (currTop == 400) { // go left
+					currLeft--;
+					divElem.style.left = currLeft + "px";
+				}
+				if (currLeft == 100) { // go up
+					currTop--;
+					divElem.style.top = currTop + "px";
+				}
+			}
+			
+		</script>
+	</head>
+	<body onload="setInterval('doAnimation()', 1)">
+		<div id="divElem">0</div>
+	</body>
+</html>

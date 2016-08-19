@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM</title>
+	</head>
+	<body>
+		<h1 id="h1">Heading</h1>
+		<p id="p1">Some Text</p>
+		<script type="text/javascript">
+			/*从<h1/>导航到<p/>*/
+			var hElement = document.getElementById("h1");
+			hElement.style.color = "red";
+
+			var pElement;
+			if (hElement.nextSibling.nodeType == 1) {
+				/*
+				 *nodeType属性返回一个数字,表示节点的类型:
+				 *元素的节点类型是1,文本的节点类型是3(包括
+				 *空白文本)
+				 */
+				pElement = hElement.nextSibling;
+			}
+			else {
+				pElement = hElement.nextSibling.nextSibling;
+			/*
+			 *如果nextSibling的nodeType是1,就把这个同级节点的
+			 *引用赋给pElement,否则就获取hElement同级节点（空
+			 *白文本节点）的下一个同级节点
+			 */
+			}
+			pElement.style.color = "blue";
+
+			alert(hElement.nextSibling.tagName);//undefined
+			alert(hElement.nextSibling.nextSibling.tagName);//p
+		</script>
+	</body>
+</html>
