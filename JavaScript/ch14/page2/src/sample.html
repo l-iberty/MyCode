@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<style type="text/css">
+			.fieldname{text-align: right;}
+			.submit{text-align: right;}
+		</style>
+		<script type="text/javascript" src="HttpRequest.js"></script>
+		<script type="text/javascript">
+			function checkUsername() {
+				var userValue = document.getElementById("username").value;
+				if (userValue == "") {
+					alert("Empty Username");
+					return;
+				}
+
+				var url = "formvalidator.php?username=" + userValue;
+
+				var request = new HttpRequest(url, checkUsername_callBack);
+				request.send();
+			}
+
+			function checkUsername_callBack(responseText) {
+				var userValue = document.getElementById("username").value;
+
+				if (responseText == "available")
+					alert("The username " + userValue + " is available!");
+				else{
+					alert("The username " + userValue + " is NOT available!");
+					alert(responseText);
+				}
+			}
+
+			function checkEmail() {
+				var emailValue = document.getElementById("email").value;
+				if (emailValue == "") {
+					alert("Empty Email");
+					return;
+				}
+
+				var url = "formvalidator.php?email=" + emailValue;
+
+				var request = new HttpRequest(url, checkEmail_callBack);
+				request.send();
+			}
+
+			function checkEmail_callBack(responseText) {
+				var emailValue = document.getElementById("email").value;
+
+				if (responseText == "available")
+					alert("The email " + emailValue + " is available!");
+				else
+					alert("The email " + emailValue + " is NOT available!");
+			}
+		</script>
+	</head>
+	<body>
+		<form>
+			<table>
+				<tr>
+					<td class="fieldname">Username:</td>
+					<td><input type="text" id="username" /></td>
+					<td><a href="javascript: checkUsername()">Check Availability</a></td>
+				</tr>
+				<tr>
+					<td class="fieldname">Email:</td>
+					<td><input type="text" id="email" /></td>
+					<td><a href="javascript: checkEmail()">Check Availability</a></td>
+				</tr>
+				<tr>
+					<td class="fieldname">Password:</td>
+					<td><input type="password" id="password" /></td>
+				</tr>
+				<tr>
+					<td class="fieldname">Verify Password:</td>
+					<td><input type="password" id="verify_password" /></td>
+				</tr>
+				<tr>
+					<td class="submit" colspan="3">
+					<!--colspan指定横跨的单元格列数-->
+						<input type="submit" value="Submit" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

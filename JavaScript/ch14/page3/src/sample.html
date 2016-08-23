@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<style type="text/css">
+			.fieldname{text-align: right;}
+			.submit{text-align: right;}
+			/*#hiddenFrame{display: none;}*/
+		</style>
+		<script type="text/javascript">
+			function checkUsername() {
+				var userValue = document.getElementById("username").value;
+				if (userValue == "") {
+					alert("Empty Username");
+					return;
+				}
+
+				var url = "iframe_formvalidator.php?username=" + userValue;
+				window.frames["hiddenFrame"].location = url;
+			}
+
+			function checkUsername_callBack(data, userValue) {
+				if (data == "available")
+					alert("The username " + userValue + " is available!");
+				else
+					alert("The username " + userValue + " is NOT available!");
+			}
+
+			function checkEmail() {
+				var emailValue = document.getElementById("email").value;
+				if (emailValue == "") {
+					alert("Empty Email");
+					return;
+				}
+
+				var url = "iframe_formvalidator.php?email=" + emailValue;
+				window.frames["hiddenFrame"].location = url;
+				// 这两行涉及php的,干了什么我也不懂
+			}
+
+			function checkEmail_callBack(data, emailValue) {
+				if (data == "available")
+					alert("The email " + emailValue + " is available!");
+				else
+					alert("The email " + emailValue + " is NOT available!");
+			}
+		</script>
+	</head>
+	<body>
+		<form>
+			<table>
+				<tr>
+					<td class="fieldname">Username:</td>
+					<td><input type="text" id="username" /></td>
+					<td><a href="javascript: checkUsername()">Check Availability</a></td>
+				</tr>
+				<tr>
+					<td class="fieldname">Email:</td>
+					<td><input type="text" id="email" /></td>
+					<td><a href="javascript: checkEmail()">Check Availability</a></td>
+				</tr>
+				<tr>
+					<td class="fieldname">Password:</td>
+					<td><input type="password" id="password" /></td>
+				</tr>
+				<tr>
+					<td class="fieldname">Verify Password:</td>
+					<td><input type="password" id="verify_password" /></td>
+				</tr>
+				<tr>
+					<td class="submit" colspan="3">
+					<!--colspan指定横跨的单元格列数-->
+						<input type="submit" value="Submit" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		<iframe src="about:blank" id="hiddenFrame" name="hiddenFrame" />
+	</body>
+</html>

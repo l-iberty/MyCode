@@ -44,7 +44,7 @@
 	<body id="msgContainer">
 		<script type="text/javascript">
 			var xmlDoc = createDocument();
-			xmlDoc.async = false; // 等xml加载完再加载页面的剩余部分
+			xmlDoc.async = false; // 采用同步模式,等xml加载完再加载页面的剩余部分
 			xmlDoc.load("motd.xml");
 
 			document.getElementById("msgContainer").innerHTML = getDailyMsg();

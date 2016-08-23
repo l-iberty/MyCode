@@ -1,0 +1,2 @@
+#Ajax
+> page1的代码能理解，page2和page3的设计php和web服务器的各种乱七八糟的东西，不很明白

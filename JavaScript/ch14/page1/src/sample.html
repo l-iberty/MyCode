@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ajax</title>
+		<script type="text/javascript" src="HttpRequest.js"></script>
+		<script type="text/javascript">
+			function handleData(msg) {
+				alert(msg);
+			}
+
+			var httpRequest = new HttpRequest("HttpRequest.js", handleData);
+			httpRequest.send();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
