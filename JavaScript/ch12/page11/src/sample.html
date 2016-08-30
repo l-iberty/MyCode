@@ -74,9 +74,11 @@
 
 				var div = document.createElement("div");
 				var text = document.createTextNode("Description for Tab" + num);
+				var br = document.createElement("br");
 
 				div.appendChild(text);
 				descContainer.appendChild(div);
+				descContainer.appendChild(br);
 			}
 
 			document.onclick = handleEvent;
