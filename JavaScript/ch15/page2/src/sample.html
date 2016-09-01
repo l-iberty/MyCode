@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/Prototype/prototype-1.7.3.js"></script>
+		<script type="text/javascript">
+			function window_onload() {
+				$(document.body).writeAttribute("bgColor", "yellow").insert("<h1>Hello, Prototype World!</h1>");
+				// Prototype中的大部分函数返回的对象同样封装了相应的DOM对象
+				// $()函数返回经过扩展的DOM对象,它仍然是DOM对象,只是添加了新方法
+				// Prototype的$()函数只允许通过id和DOM对象来检索元素,而jQuery允许使用css选择器
+				// Prototype中选择id为Div的元素的语法: $("Div"); jQuery则是$("#Div").二者使用DOM对象检索元素的语法相同
+			}
+
+			Event.observe(window, "load", window_onload);
+			// 参数一:添加事件处理程序的DOM或BOM对象
+			// 参数二:要处理的事件名称
+			// 参数三:要绑定的事件处理函数
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

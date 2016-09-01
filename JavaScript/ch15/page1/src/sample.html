@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/jQuery/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript">
+			function document_ready() {
+				$(document.body).attr("bgColor", "yellow").html("<h1>Hello, jQuery World!</h1>");
+				/*
+				 *调用jQuery函数,并给改函数传递了DOM对象document.body.jQuery函数返回一个jQuery对象,
+				 *该对象封装了对象document.body的引用,所以attr()方法在document.body对象上设置属性.
+				 */
+
+				 /*
+				  *attr()方法返回同一个封装了DOM对象引用的jQuery对象.
+				  */
+				 /*
+				  *jQuery的html()方法使用DOM属性innerHTML在DOM对象(此处为document.body)内设置HTML.
+				  */
+			}
+
+			$(document).ready(document_ready);
+		</script>
+	</head>
+	<body>
+		<div>Test jQuery</div>
+	</body>
+</html>

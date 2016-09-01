@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<link rel="stylesheet" type="text/css" href="sample.css" />
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/Prototype/prototype-1.7.3.js"></script>
+		<script type="text/javascript">
+			var prevNum = 0;
+			function handleEvent(event) {
+				/*
+				 *与jQuery不同,Prototype没有模拟W3C DOM事件模型创建自己的事件模型,
+				 *而是扩展了window.event对象,因此事件处理程序的参数是window.event
+				 *的引用.不过参数名可以任意.
+				 */
+				var e = event.element();
+				/*
+				 *Prototype为window.event对象扩展了新方法element(),
+				 *该方法返回IE和W3C DOM中srcElement和target属性值.
+				 */
+
+				if (event.type == "mouseover" || event.type == "mouseout") {
+					if (e.hasClassName("tabStrip-tab") && !e.hasClassName("tabStrip-tab-click"))
+						e.toggleClassName("tabStrip-tab-hover");
+				}
+
+				if (event.type == "click") {
+					if (e.hasClassName("tabStrip-tab-hover")) {
+						var id = e.id; // e等价于event.element(),等价于W3C DOM模型的event.target
+						var num = id.substr(id.lastIndexOf("-") + 1);
+
+						if (prevNum != num) {
+							deactivateTab();
+
+							e.toggleClassName("tabStrip-tab-hover").toggleClassName("tabStrip-tab-click");
+							showDescription(num);
+							prevNum = num;
+						}
+					}
+				}
+			}
+
+			function showDescription(num) {
+				var attributes = new Object();
+				attributes.style = "color:red";
+
+				var div = new Element("div", attributes).update("Description for tab " + num);
+				$("desContainer").insert(div).insert("<br/>"); /* 在jQuery中通过id检索元素的语法是 $("#desContainer") */
+				// .insert(new Element("br"))也可以
+				/*
+				 *Element对象的构造需要在构造函数中提供两个参数:
+				 *标记名字符串(必需)和包含属性和属性值的对象(可选).
+				 *update()替换元素的所有已有内容,insert()只插入;
+				 *二者都接受字符串为参数,可以是简单文本、HTML或Element对象.
+				 */
+			}
+
+			function deactivateTab() {
+				var prevTab = $("tabStrip-tab-" + prevNum);
+				if (prevTab)
+					prevTab.removeClassName("tabStrip-tab-click");
+			}
+
+			$(document).observe("click", handleEvent);
+			$(document).observe("mouseover", handleEvent);
+			$(document).observe("mouseout", handleEvent);
+		</script>
+	</head>
+	<body>
+		<div class="tabStrip">
+			<div id="tabStrip-tab-1" class="tabStrip-tab">Tab-1</div>
+			<div id="tabStrip-tab-2" class="tabStrip-tab">Tab-2</div>
+			<div id="tabStrip-tab-3" class="tabStrip-tab">Tab-3</div>
+		</div>
+		<div id="desContainer"></div>
+	</body>
+</html>

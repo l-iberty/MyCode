@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/MooTools/1.5.2/mootools-1.5.2.min.js"></script>
+		<script type="text/javascript">
+			function handleEvent(e) {
+				alert("Event Type: " + e.type);
+				alert("You clicked " + e.target.tagName + " at X: " + e.page.x + ", Y:" + e.page.y);
+				// 书上给出的属性名首字母大写的都是错的,属性名全小写
+			}
+			$(document).addEvent("click", handleEvent);
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

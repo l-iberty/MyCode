@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<style type="text/css">
+			.fieldname{text-align: right;}
+			.submit{text-align: right;}
+		</style>
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/jQuery/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript">
+			function checkUsername() {
+				var userValue = $("#username").val();
+				// val()返回<input/>元素的value属性的值
+
+				if (userValue == "") {
+					alert("Empty Username");
+					return;
+				}
+
+				var parms = new Object();
+				parms.username = userValue;
+				$.get("formvalidator.php", parms, checkUsername_callBack);
+				/*函数对象$的get()方法用于向服务器发出请求*/
+				/*
+				 *14章通过"formvalidator.php?username=jmcpeak"的格式向URL发送参数,
+				 *在jQuery中则通过传递键/值对象(此处为parms)向URL发送参数.
+				 */
+			}
+
+			function checkUsername_callBack(data, status) {
+				/*
+				 *回调函数的参数说明:
+				 *data: 从服务器请求的数据
+				 *status: 请求状态.由于jQuery仅在请求成功时才调用回调函数,
+				 *        故status必为success,所以可以省略该参数
+				 */
+				var userValue = $("#username").val();
+
+				if (data == "available")
+					alert("The username " + userValue + " is available");
+				else
+					alert("The username " + userValue + " is not available");
+			}
+
+			function checkEmail() {
+				var emailValue = $("#email").val();
+
+				if (emailValue == "") {
+					alert("Empty Email");
+					return;
+				}
+
+				var parms = new Object();
+				parms.email = emailValue;
+
+				$.get("formvalidator.php", parms, checkUsername_callBack);
+			}
+
+			function checkUsername_callBack(data, status) {
+				var emailValue = $("#email").val();
+
+				if (data == "available")
+					alert("The email " + emailValue + " is available");
+				else
+					alert("The email " + emailValue + " is not available");
+			}
+
+			function request_error(event, request, settings) {
+				alert("An error occurred with the following URL:\n" +
+					settings.url + "\nStatus code: " + request.status);
+				// status为200,说明请求是成功的,但还是发生了某些错误
+			}
+
+			$(document).ajaxError(request_error);
+			/*
+			 *发生请求错误时会为ajaxError()注册一个事件处理程序(此处为request_error).
+			 *该事件处理程序接受3个参数:
+			 *event: 包含事件信息的对象
+			 *request: 用于发出请求的XMLHttpRequest对象
+			 *settings: 用于请求的设置的对象. 可以通过该对象的属性检索请求的URL以及请求
+			 *          是否异步(async)等信息
+			 */
+		</script>
+	</head>
+	<body>
+		<form>
+			<table>
+				<tr>
+					<td class="fieldname">Username:</td>
+					<td><input type="text" id="username" /></td>
+					<td>
+						<a href="javascript: checkUsername()">Check Availablity</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="fieldname">Email:</td>
+					<td><input type="text" id="email" /></td>
+					<td>
+						<a href="javascript: checkEmail()">Check Availablity</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="fieldname">Password:</td>
+					<td><input type="password" id="password" /></td>
+				</tr>
+				<tr>
+					<td class="fieldname">Verify password:</td>
+					<td><input type="password" id="password2" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" class="submit"><input type="submit" value="Submit"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

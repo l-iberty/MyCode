@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<style type="text/css">
+			.fieldname{text-align: right;}
+			.submit{text-align: right;}
+		</style>
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/Prototype/prototype-1.7.3.js"></script>
+		<script type="text/javascript">
+			function checkUsername() {
+				var userValue = $F("username");
+				// $F()用于表单输入控件,接受元素id或元素对象作为参数,返回元素的值,即value属性值
+
+				if (userValue == "") {
+					alert("Empty Username");
+					return;
+				}
+
+				var parms = new Object();
+				parms.username = userValue;
+
+				var options = getBasicOptions();
+				options.onSuccess = checkUsername_callBack; // onSuccess 请求成功时调用的回调函数
+				options.parameters = parms; // parameters 包含随请求一起发送的参数字符串,或包含参数及其值得对象
+
+				new Ajax.Request("formvalidator.php", options);
+				/*
+				 *Ajax对象的核心是Ajax.Request()构造函数.参数一是发出请求的URL,
+				 *参数二是一个包含一组选项的对象,对象在发出请求时使用这些选项,
+				 *以改变Ajax.Request()的行为.
+				 */
+			}
+
+			function checkUsername_callBack(request) {
+				// request是一个包含XMLHttpRequest对象的参数,用于发出请求
+
+				var userValue = $F("username");
+
+				if (request.responseText == "available")
+					alert("The username " + userValue + " is available");
+				else
+					alert("The username " + userValue + " is not available");
+				alert(request.status);
+			}
+
+			function checkEmail() {
+				var emailValue = $F("email");
+
+				if (emailValue == "") {
+					alert("Empty Email");
+					return;
+				}
+
+				var parms = new Object();
+				parms.email = emailValue;
+
+				var options = getBasicOptions();
+				options.onSuccess = checkEmail_callBack;
+				options.parameters = parms;
+
+				new Ajax.Request("formvalidator.php", options);
+			}
+
+			function checkEmail_callBack(request) {
+				var emailValue = $F("email");
+
+				if (request.responseText == "available")
+					alert("The email " + emailValue + " is available");
+				else
+					alert("The email " + emailValue + " is not available");
+			}
+
+			function request_onFailure(request) {
+				alert("Error: HTTP Status: " + request.status);
+			}
+
+			function getBasicOptions() {
+				var options = new Object();
+				options.method = "get"; // method 请求类型,默认是post
+				options.onFailure = request_onFailure; // onFailure 请求失败时调用的回调函数
+
+				return options;
+			}
+		</script>
+	</head>
+	<body>
+		<form>
+			<table>
+				<tr>
+					<td class="fieldname">Username:</td>
+					<td><input type="text" id="username" /></td>
+					<td>
+						<a href="javascript: checkUsername()">Check Availablity</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="fieldname">Email:</td>
+					<td><input type="text" id="email" /></td>
+					<td>
+						<a href="javascript: checkEmail()">Check Availablity</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="fieldname">Password:</td>
+					<td><input type="password" id="password" /></td>
+				</tr>
+				<tr>
+					<td class="fieldname">Verify password:</td>
+					<td><input type="password" id="password2" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" class="submit"><input type="submit" value="Submit"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

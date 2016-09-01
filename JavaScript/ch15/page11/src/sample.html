@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<style type="text/css">
+			.fieldname{text-align: right;}
+			.submit{text-align: right;}
+		</style>
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/MooTools/1.5.2/mootools-1.5.2.min.js"></script>
+		<script type="text/javascript">
+			function checkUsername() {
+				var userValue = $("username").value; // $()返回经过扩展的DOM对象
+				if (userValue == "") {
+					alert("Empty Username");
+					return;
+				}
+
+				var options = getBasicOptions();
+				options.onSuccess = checkUsername_callBack;
+
+				new Request(options).send("username=" + username);
+				/*
+				 *MooTools的Ajax工具的建立依赖于Request对象,
+				 *再链接send()方法,并传递参数字符串发出请求.
+				 */
+			}
+
+			function checkUsername_callBack(text, xml) {
+				/*
+				 *onSucess回调函数需要两个参数:
+				 *text: XMLHttpRequest对象的responseText
+				 *xml: XMLHttpRequest对象的responseXML
+				 */
+				var userValue = $("username").value;
+
+				if (text == "available")
+					alert("The username " + userValue + " is available");
+				else
+					alert("The username " + userValue + " is not available");
+			}
+
+			function checkEmail() {
+				var emailValue = $("email").value;
+
+				if (emailValue == "") {
+					alert("Empty Email");
+					return;
+				}
+
+				var options = getBasicOptions();
+				options.onSuccess = checkEmail_callBack;
+
+				new Request(options).send("email=" + emailValue);
+			}
+
+			function checkEmail_callBack(text, xml) {
+				var emailValue = $("email").value;
+
+				if (text == "available")
+					alert("The email " + emailValue + " is available");
+				else
+					alert("The email " + emailValue + " is not available");
+			}
+
+			function request_onFailure(request) {
+				alert("Error: HTTP Status: " + request.status);
+			}
+
+			function getBasicOptions() {
+				var options = new Object();
+				options.method = "get";
+				options.onFailure = request_onFailure;
+				options.url = "formvalidator.php;"
+
+				return options;
+			}
+		</script>
+	</head>
+	<body>
+		<form>
+			<table>
+				<tr>
+					<td class="fieldname">Username:</td>
+					<td><input type="text" id="username" /></td>
+					<td>
+						<a href="javascript: checkUsername()">Check Availablity</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="fieldname">Email:</td>
+					<td><input type="text" id="email" /></td>
+					<td>
+						<a href="javascript: checkEmail()">Check Availablity</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="fieldname">Password:</td>
+					<td><input type="password" id="password" /></td>
+				</tr>
+				<tr>
+					<td class="fieldname">Verify password:</td>
+					<td><input type="password" id="password2" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" class="submit"><input type="submit" value="Submit"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

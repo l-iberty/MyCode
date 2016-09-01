@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/MooTools/1.5.2/mootools-1.5.2.min.js"></script>
+		<script type="text/javascript">
+			function window_domready() {
+				$(document.body).setProperty("bgColor", "yellow").set("html", "<h1>Hello, MooTools World!</h1>");
+			}
+
+			window.addEvent("domready", window_domready);
+			// window.load在页面所有资源加载完毕后触发
+			// domready在DOM树构建完毕后触发,此时页面所有内容可能还未加载完毕
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

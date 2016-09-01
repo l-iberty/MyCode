@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<link rel="stylesheet" type="text/css" href="sample.css" />
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/jQuery/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript">
+			var prevNum = 0;
+			function handleEvent(e) {
+				var e1 = $(e.target);
+
+				if (e.type == "mouseover" || e.type == "mouseout") {
+					// 设置css类为tabStrip-tab的<div/>元素的样式
+					if (e1.hasClass("tabStrip-tab") && !e1.hasClass("tabStrip-tab-click"))
+						e1.toggleClass("tabStrip-tab-hover");
+					/*
+					 *hasClass()方法根据是否把css类应用于元素,返回true或false.
+					 *toggleClass()方法检查指定的类是否存在,若存在则删除,若不存在则添加;
+					 *该方法返回封装了DOM对象引用的jQuery对象.
+					 */
+				}
+
+				if (e.type == "click") {
+					if (e1.hasClass("tabStrip-tab-hover")) {
+						/*
+						 *if语句的作用:
+						 *把它去掉后在页面空白处单击鼠标你就知道了...
+						 *(前面已经保证tabStrip-tab-hover只会应用到tabStrip——那三个div——上)
+						 */
+						var id = e.target.id; // 获取表示元素id的字符串
+						var num = id.substr(id.lastIndexOf("-") + 1);
+
+						// console.log("Is prevNum == num? " + (prevNum == num));
+						// if语句只是为了增强代码的健壮性, prevNum != num 总是true
+						if (prevNum != num) {
+							deactivateTab();
+
+							/*console.log("hasClass(tabStrip-tab-hover) " +
+								e1.hasClass("tabStrip-tab-hover")); // true
+							console.log("hasClass(tabStrip-tab-click) " +
+								e1.hasClass("tabStrip-tab-click")); // false
+							*/
+							e1.toggleClass("tabStrip-tab-hover").toggleClass("tabStrip-tab-click");
+							/*
+							 *单击之前元素应用了tabStrip-tab-hover,单击时移除之;
+							 *单击之前元素尚未应用tabStrip-tab-click,单击时应用之.
+							 */
+							
+							showDescription(num);
+							prevNum = num;
+						}
+					}
+				}
+			}
+
+			function showDescription(num) {
+				$("#desContainer").append("Description for tab " + num)
+								  .append($(document.createElement("br")));
+			}
+
+			function deactivateTab() {
+				/*
+				 *prevNum记录当前被单击元素之前的那个被单击元素的编号,
+				 *比如单击id为tabStrip-tab-1后又单击了tabStrip-tab-2,
+				 *则单击tabStrip-tab-2时prevNum就为1.
+				 */
+				/*
+				 *从prevNum的作用可见,该方法的作用和它的名字一样,移除
+				 *前一个被单击元素的tabStrip-tab-click类.
+				 */
+				var desE1 = $("#tabStrip-tab-" + prevNum);
+				// 获取相应id的元素,并放入一个数组中.因此desE1是数组变量
+
+				if (desE1.length > 0) // 首次单击时desE1.length = 0
+					$("#tabStrip-tab-" + prevNum).removeClass("tabStrip-tab-click");
+			}
+
+			$(document).bind("click mouseover mouseout", handleEvent);
+		</script>
+	</head>
+	<body>
+		<div class="tabStrip">
+			<div id="tabStrip-tab-1" class="tabStrip-tab">Tab-1</div>
+			<div id="tabStrip-tab-2" class="tabStrip-tab">Tab-2</div>
+			<div id="tabStrip-tab-3" class="tabStrip-tab">Tab-3</div>
+		</div>
+		<div id="desContainer"></div>
+	</body>
+</html>

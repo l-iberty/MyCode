@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<style type="text/css">
+			input{margin-top: 10px;}
+		</style>
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/jQuery/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript">
+		    /*
+		     *传统方法需要找到待删除元素的父元素
+			 *	function removeDiv() {
+			 *		var div = document.getElementById("myDiv");
+ 			 *
+			 *		if (div != null) {
+			 *			var parentOfDiv = div.parentNode;
+			 *			parentOfDiv.removeChild(div);
+			 *		}
+			 *		else
+			 *			alert("There is no div!");
+			 *	}
+			 */
+
+			// 使用jQuery却不需要,并且无需使用if进行检测
+			function removeDiv() {
+				$("#myDiv").remove();
+			}
+
+			// empty()清空元素的所有子节点,不包含元素本身
+			function body_empty() {
+				$(document.body).empty();
+			}
+		</script>
+	</head>
+	<body>
+		<div id="myDiv">Div</div>
+		<form>
+			<input type="button" value="Remove <div/>" onclick="removeDiv()" />
+			<input type="button" value="Clear the Body" onclick="body_empty()" />
+		</form>
+	</body>
+</html>

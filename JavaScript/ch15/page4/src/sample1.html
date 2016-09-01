@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/jQuery/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript">
+			// tranditional way
+			/*
+			function addElement_a() {
+				var a = document.createElement("a");
+				a.id = "myLink";
+				a.setAttribute("href", "http://jQuery.com");
+				a.setAttribute("title", "jQuery's Website");
+				a.setAttribute("target", "_blank");//在新标签页中打开
+
+				var text = document.createTextNode("Link to jQuery.com");
+
+				a.appendChild(text);
+				document.body.appendChild(a);
+			}
+
+			window.onload = addElement_a; //页面资源加载完毕后执行
+			*/
+
+			// jQuery's way
+			function addElement_a() {
+				var a = $(document.createElement("a"));
+				$(document.body).append(
+					a.attr("id", "myLink")
+					.attr("href", "http://jQuery.com")
+					.attr("title", "jQuery's Website")
+					.attr("target", "_blank")
+					.text("Link to jQuery.com")
+					// 此处等价于.append("Link to jQuery.com")
+				);
+				/*
+				 *append()方法可以接受DOM对象、jQuery对象和包含html内容的字符串作为参数,
+				 *参数内容被追加到DOM对象中
+				 */
+
+				/*
+				 *另一种写法:
+				 *	$(document.body).append(
+				 *		$(document.createElement("a"))
+				 *		.attr("id", "myLink")
+				 *		.attr("href", "http://jQuery.com")
+				 *		.attr("title", "jQuery's Website")
+				 *		.attr("target", "_blank")
+				 *		.text("Link to jQuery.com")
+				 *	);
+				 */
+			}
+
+			$(document).ready(addElement_a); //DOM树构建完毕后执行
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

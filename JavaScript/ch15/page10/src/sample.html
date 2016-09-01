@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<link rel="stylesheet" type="text/css" href="sample.css" />
+		<script type="text/javascript" src="../../../../Frameworks_of_JavaScript/MooTools/1.5.2/mootools-1.5.2.min.js"></script>
+		<script type="text/javascript">
+			var prevNum = 0;
+			function handleEvent(e) {
+				// MooTools有自己的Event对象,有专用的一组属性.
+
+				var e1 = $(e.target); // $()函数返回经过扩展的对象,为其添加新方法.
+
+				if (e.type == "mouseover" || e.type == "mouseout") {
+					if (e1.hasClass("tabStrip-tab") && !e1.hasClass("tabStrip-tab-click"))
+						e1.toggleClass("tabStrip-tab-hover");
+				}
+
+				if (e.type == "click") {
+					if (e1.hasClass("tabStrip-tab-hover")) {
+						var id = e1.id;
+						// var id = e.target.id; Right Too!
+						var num = id.substr(id.lastIndexOf("-") + 1);
+
+						if (prevNum != num) {
+							deactivateTab();
+
+							e1.toggleClass("tabStrip-tab-hover").toggleClass("tabStrip-tab-click");
+							showDescription(num);
+							prevNum = num;
+						}
+					}
+				}
+			}
+
+			function showDescription(num) {
+				var attr = new Object();
+				attr.style = "color:red; clear:left";
+				// 在page7的Prototype中通过插入<br/>实现换行,通过添加属性clear:left也能实现相同效果
+
+				var div = new Element("div", attr).appendText("Description for Tab " + num);
+				$("desContainer").adopt(div);
+				// 若不使用clear:left,可追加.adopt(new Element("br"))
+				// 注意: adopt()不接受HTML,所以不能使用 adopt("<br/>") 添加<br/>元素
+			}
+
+			function deactivateTab() {
+				var desE1 = $("tabStrip-tab-" + prevNum);
+
+				if (desE1)
+					$("tabStrip-tab-" + prevNum).toggleClass("tabStrip-tab-click");
+			}
+
+			var handlers = new Object();
+			handlers.mouseover = handleEvent;
+			handlers.mouseout = handleEvent;
+			handlers.click = handleEvent;
+
+			$(document).addEvents(handlers);
+		</script>
+	</head>
+	<body>
+		<div class="tabStrip">
+			<div id="tabStrip-tab-1" class="tabStrip-tab">Tab-1</div>
+			<div id="tabStrip-tab-2" class="tabStrip-tab">Tab-2</div>
+			<div id="tabStrip-tab-3" class="tabStrip-tab">Tab-3</div>
+		</div>
+		<div id="desContainer"></div>
+	</body>
+</html>
