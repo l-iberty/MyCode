@@ -30,7 +30,7 @@
 				return a + b + c;
 			}
 
-			alert(f(1,2)); // NaN,因为第二次定义覆盖了第一次定义,行参c为undefined
+			alert(f(1,2,3)); // NaN,因为第二次定义覆盖了第一次定义,行参c为undefined
 			/*
 			 *以上函数定义等价于
 			 *	var f = function(a, b) {
