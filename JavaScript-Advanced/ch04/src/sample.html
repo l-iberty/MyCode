@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript">
+			// 创建对象字面量
+			var person1 = {
+				name: "Jonh",
+
+				toString: function() {
+					return this.name;
+				}
+			};
+			var person2 = {
+				name: "Jack",
+
+				toString: function() {
+					return this.name;
+				}
+			};
+
+			var people = [person1, person2];// 创建一个数组,包含两个对象
+			console.log(people); // Array [ Object, Object ]
+			console.log(people.toString()); // John, Jack
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

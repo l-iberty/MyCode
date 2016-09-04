@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript">
+			/*
+			 *函数是对象,Function类型的实例,函数名是Function对象
+			 *的引用.
+			 */
+
+			function sum(num1, num2) {
+				alert(num1 + num2);
+			}
+			var sum2 = sum; // sum和sum2都是引用类型,引用同一个Function对象
+			sum2(10, 20);
+
+			// 函数表达式语法定义函数
+			var sum3 = function(num1, num2) {
+				alert(num1 + num2);
+			};
+			sum3(10, 20);
+
+			/*
+			 *为什么没有重载?
+			 */
+			function f(a, b) {
+				return a + b;
+			}
+			function f(a, b, c) {
+				return a + b + c;
+			}
+
+			alert(f(1,2)); // NaN,因为第二次定义覆盖了第一次定义,行参c为undefined
+			/*
+			 *以上函数定义等价于
+			 *	var f = function(a, b) {
+			 *		return a + b;
+			 *	}
+			 *	f = function(a, b, c) {
+			 *		return a + b + c;
+			 *	}
+			 *显然,创建第二个函数时,实际是让引用f指向一个新建的Function对象.
+			 */
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

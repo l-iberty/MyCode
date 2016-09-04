@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript">
+			var num = 10;
+
+			var person = new Object();
+			person.name = "Niko";
+
+			var con = new Object();
+			con.a = 1;
+			con.b = 2;
+
+			function setNum(num) {
+				num = 15;
+			}
+			function setName(obj) {
+				obj.name = "John";
+				/*
+				 *如果参数是引用类型,问题有所不同.虽然是按值传递,
+				 *但是引用的对象是同一个.若需要交换变量值,这是个
+				 *不错的方法.
+				 */
+				obj = new Object();
+				obj.name = "Mike";
+				/*
+				 *如果传递的是引用,那么person此时应该引用这个新对象,
+				 *但输出显示,person的name属性值仍然是John,所以obj是
+				 *原始对象的另一个引用,现在它去引用一个新的临时对象,
+				 *函数结束后该临时对象被销毁.
+				 */
+			}
+			function swap(obj) {
+				var tmp;
+
+				tmp = obj.a;
+				obj.a = obj.b;
+				obj.b = tmp;
+			}
+
+			setNum(num); // 全局变量num的值不会改变
+			setName(person);
+			alert(person.name);
+
+			swap(con);
+			alert(con.a + "," + con.b);
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>
