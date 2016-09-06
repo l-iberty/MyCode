@@ -1,14 +1,3 @@
-/**	本代码中所用的图像处理类在读取RGB时会有误差，微
-  * 小的误差将被解密函数的累乘急剧放大，导致无法恢
-  * 复.然而测试时使用的RGB(255,0,0)的图像在一组特殊
-  * 密钥的作用下不会产生误差，但不产生误差必须要特
-  * 定的RGB和特定的密钥，但实际应用时这不可能满足.
-  */
-/** 使用.bmp格式可以很大程度上减小误差，但密钥的取值
-  * 也对误差的大小有影响.经反复测试，本代码使用的密
-  * 钥产生的误差最小.
-  */
-
 import java.awt.*;
 import java.io.*;
 import java.util.*;
@@ -52,8 +41,8 @@ class PicEncryptionCRT{
 				}
 
 		for(i = 0; i < image.length; i++){
-			picture[i] = new File("E_" + i + "Image.bmp");
-			ImageIO.write(image[i], "bmp", picture[i]);
+			picture[i] = new File("E_" + i + "Image.jpg");
+			ImageIO.write(image[i], "jpg", picture[i]);
 		}
 
 		//检测原图的RGB
@@ -167,7 +156,7 @@ public class PicEncryptionCRTDemo{
 			File pic = new File(arg[0]);
 			BufferedImage bi = ImageIO.read(pic);
 
-			String[] filename = {"E_0Image.bmp","E_1Image.bmp","E_2Image.bmp","E_3Image.bmp"};
+			String[] filename = {"E_0Image.jpg","E_1Image.jpg","E_2Image.jpg","E_3Image.jpg"};
 			pec.fileEncrypt(bi, m);
 			pec.fileDecrypt(filename, m);
 		}catch(IOException e){

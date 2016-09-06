@@ -7,7 +7,7 @@ import java.io.*;
 
 public class PainterDemo extends JFrame implements ActionListener{
 	private JMenuItem sFile, oFile;
-	private JRadioButton ellButton, recButton, lineButton;
+	private JRadioButton ellButton, recButton, lineButton, dragButton;
 	private JButton clearButton;
 	private Painter pt;
 	
@@ -38,12 +38,16 @@ public class PainterDemo extends JFrame implements ActionListener{
 		recButton.addActionListener(this);
 		lineButton = new JRadioButton("line");
 		lineButton.addActionListener(this);
+		dragButton = new JRadioButton("drag");
+		dragButton.addActionListener(this);
 		shapeItem.add(ellButton);
 		shapeItem.add(recButton);
 		shapeItem.add(lineButton);
+		shapeItem.add(dragButton);
 		bar.add(ellButton);
 		bar.add(recButton);
 		bar.add(lineButton);
+		bar.add(dragButton);
 		
 		// 清空选项
 		clearButton = new JButton("Clear(C)");
@@ -79,6 +83,8 @@ public class PainterDemo extends JFrame implements ActionListener{
 			pt.setItem(recButton.getText());
 		}else if(source == lineButton){
 			pt.setItem(lineButton.getText());
+		}else if (source == dragButton){
+			pt.setItem(dragButton.getText());
 		}else if(source == clearButton){
 			pt.clearPainting();
 		}
@@ -90,13 +96,16 @@ public class PainterDemo extends JFrame implements ActionListener{
 }
 
 class Painter extends JPanel implements MouseListener, MouseMotionListener{
-	private int x1,y1,x2,y2,a,b;
+	private int x1,y1,x2,y2,w,h;
+	private int prevX, prevY, currentX, currentY, dw, dh; //用于拖动
+	private boolean isDrag = false;
 	private String msg;
 	private Ellipse2D.Float ellipse;
 	private Rectangle2D.Float rectangle;
 	private Line2D.Float line;
 	private ArrayList<Shape> shapeList = new ArrayList<>();
 	private Shape[] shapeArray;
+	private int count = 0;
 	
 	public Painter(){
 		addMouseListener(this);
@@ -107,7 +116,8 @@ class Painter extends JPanel implements MouseListener, MouseMotionListener{
         Graphics2D comp2D = (Graphics2D)comp;
 		BasicStroke pen = new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
         
-		Rectangle2D.Float recClear = new Rectangle2D.Float(0, 0, getSize().width, getSize().height);
+		Rectangle2D.Float recClear = new Rectangle2D.Float(0F, 0F,
+			(float)getSize().width, (float)getSize().height);
 		comp2D.setColor(getBackground());
 		comp2D.fill(recClear); //清屏代码
 		
@@ -123,16 +133,19 @@ class Painter extends JPanel implements MouseListener, MouseMotionListener{
 		if(msg != null){
 			switch (msg){
 				case "ellipse":
-					ellipse = new Ellipse2D.Float( Math.min(x1,x2), Math.min(y1,y2), a, b );
+					ellipse = new Ellipse2D.Float( Math.min(x1,x2), Math.min(y1,y2), w, h );
 					comp2D.draw(ellipse);
 					break;
 				case "rectangle":
-					rectangle = new Rectangle2D.Float( Math.min(x1,x2), Math.min(y1,y2), a, b );
+					rectangle = new Rectangle2D.Float( Math.min(x1,x2), Math.min(y1,y2), w, h );
 					comp2D.draw(rectangle);
 					break;
 				case "line":
 					line = new Line2D.Float( x1, y1, x2, y2 );
 					comp2D.draw(line);
+					break;
+				case "drag":
+					dragShape();
 					break;
 			}
 		}
@@ -152,7 +165,7 @@ class Painter extends JPanel implements MouseListener, MouseMotionListener{
 	public void setShapeListAndRepaint(Shape[] s){
 		for(int i = 0; i < s.length; i++)
 			shapeList.add(s[i]);
-		repaint();
+		repaint();// 自动调用paintComponent()
 	}
 	
 	public void clearPainting(){
@@ -162,6 +175,10 @@ class Painter extends JPanel implements MouseListener, MouseMotionListener{
 		rectangle = null;
 		line = null;
 		repaint();
+	}
+
+	private void dragShape(){
+		isDrag = true;
 	}
 	
 	// 监听器
@@ -177,6 +194,8 @@ class Painter extends JPanel implements MouseListener, MouseMotionListener{
     public void mousePressed(MouseEvent evt){
         x1 = evt.getX();
         y1 = evt.getY();
+        prevX = x1;
+        prevY = y1;
     }
     public void mouseReleased(MouseEvent evt){
         if(ellipse != null)
@@ -190,8 +209,29 @@ class Painter extends JPanel implements MouseListener, MouseMotionListener{
     public void mouseDragged(MouseEvent evt){
 		x2 = evt.getX();
         y2 = evt.getY();
-		a = Math.abs(x1 - x2);
-		b = Math.abs(y1 - y2);
+        w = Math.abs(x1 - x2);
+		h = Math.abs(y1 - y2);
+
+        if (isDrag){
+        	currentX = x2;
+	        currentY = y2;
+	        dw = currentX - prevX;
+	        dh = currentY - prevY;
+
+	        Rectangle2D.Float shapeToDrag = (Rectangle2D.Float)shapeList.get(0);
+
+	        float newX = (float)(x1 + dw);
+	        float newY = (float)(y1 + dh);
+	        float newWidth = (float)shapeToDrag.getWidth();
+	        float newHeight = (float)shapeToDrag.getHeight();
+
+	        Rectangle2D.Float newRec = new Rectangle2D.Float(newX, newY, newWidth, newHeight);
+	        shapeList.clear();
+			shapeList.add(newRec);
+
+			isDrag = false;
+        }
+
 		repaint();
     }
     public void mouseMoved(MouseEvent evt){
