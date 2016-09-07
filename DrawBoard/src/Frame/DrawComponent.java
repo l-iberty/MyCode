@@ -18,10 +18,10 @@ import java.util.Vector;
 
 import SaveRead.*;
 
-/**
- * Created by Specific on 16/5/5.
- **/
 public class DrawComponent extends JComponent {
+    /*
+     *JComponent是所有Swing组件的基类,比如JMenuBar(菜单栏)就继承自JComponent.
+     */
     private static final int DEFAULT_WIDTH = 1200;
     private static final int DEFAULT_HEIGHT = 650;
 
@@ -47,14 +47,19 @@ public class DrawComponent extends JComponent {
         }
         addMouseListener(new MouseHandler());
         addMouseMotionListener(new MouseMotionHandler());
+        /*
+         *另一种方法是让DrawComponent实现接口MouseListener和MouseMotionListener,
+         *然后在实现接口中的方法时把MouseHandler和MouseMotionHandler里封装的鼠标
+         *事件处理代码写到里面去.
+         */
     }
 
     public ArrayList<MyShape> getShapes() {
         return shapes;
     }
 
-    public void setClassName(String g) {
-        String painterName = "Painter." + g + "Painter";
+    public void setClassName(String classname) {
+        String painterName = "Painter." + classname + "Painter";
         painter = PainterFactory.createPainterInstance(painterName);
     }
 
@@ -79,6 +84,7 @@ public class DrawComponent extends JComponent {
 
     public Dimension getPreferredSize() {
         return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        // java.awt.Dimension封装了用户界面组件的宽度和高度
     }
 
     private class MouseHandler extends MouseAdapter {
@@ -86,9 +92,9 @@ public class DrawComponent extends JComponent {
         public void mousePressed(MouseEvent e) {
             currentShape = find(e.getPoint());
             if (currentShape == null) {
-                drawingShape = painter.mousePressed(e);
+                drawingShape = painter.mousePressed(e);// 返回一个MyShape子类对象
                 if (drawingShape != null)
-                    shapes.add(drawingShape);
+                    shapes.add(drawingShape);// 将绘制出的对象添加到ArrayList中
                 repaint();
             } else {
                 setClassName(currentShape.getClassName());
@@ -102,7 +108,7 @@ public class DrawComponent extends JComponent {
         }
     }
 
-    private class MouseMotionHandler implements MouseMotionListener {
+    private class MouseMotionHandler extends MouseMotionAdapter {
 
         @Override
         public void mouseDragged(MouseEvent e) {
@@ -115,10 +121,6 @@ public class DrawComponent extends JComponent {
                 moveVector[0] = moveVector[1];
                 repaint();
             }
-        }
-
-        @Override
-        public void mouseMoved(MouseEvent e) {
         }
     }
 }

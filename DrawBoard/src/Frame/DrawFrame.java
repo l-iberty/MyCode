@@ -5,48 +5,72 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.StringJoiner;
 
 import Factory.ButtonFactory;
 import Factory.ShapeFactory;
 import SaveRead.*;
 
-/**
- * Created by Specific on 16/5/5.
- **/
-public class DrawFrame extends JFrame {
+public class DrawFrame extends JFrame implements ActionListener {
     private DrawComponent drawComponent;
     private static final int DEFAULT_WIDTH = 1200;
     private static final int DEFAULT_HEIGHT = 700;
 
     public DrawFrame() {
+        setTitle("DrawBoard");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+
         drawComponent = new DrawComponent();
         JPanel buttonPanel = new JPanel();
         ArrayList<String> classNames = ButtonFactory.getClassNames();
 
         for (String className : classNames) {
             String graphClassName = "Shapes." + className;
-            addButton(buttonPanel, ShapeFactory.createShapeInstance(graphClassName).getButtonName(), e -> drawComponent.setClassName(className));
+            //addButton(buttonPanel, ShapeFactory.createShapeInstance(graphClassName).getButtonName(),
+            //	e -> drawComponent.setClassName(className));
+            buttonPanel.add(getButton(ShapeFactory.createShapeInstance(graphClassName).getButtonName()));
         }
 
-        addButton(buttonPanel, "保存", e -> {
+        buttonPanel.add(getButton("Save"));
+        /*addButton(buttonPanel, "Save", e -> {
             try {
                 SaveRead.Save(drawComponent.getShapes());
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-        });
-        addButton(buttonPanel, "清除", e -> drawComponent.clear());
+        });*/
+        buttonPanel.add(getButton("Clear"));
+        //addButton(buttonPanel, "Clear", e -> drawComponent.clear());
 
         add(buttonPanel, BorderLayout.NORTH);
         add(drawComponent, BorderLayout.CENTER);
         pack();
     }
 
-    private void addButton(Container c, String title, ActionListener listener) {
+    private JButton getButton(String title) {
         JButton button = new JButton(title);
-        c.add(button);
-        button.addActionListener(listener);
+        button.addActionListener(this);
+
+        return button;
+    }
+
+    public void actionPerformed(ActionEvent evt) {
+        Object src = evt.getSource();
+
+        if (src.getText().equals("Save")) {
+            try {
+                SaveRead.Save(drawComponent.getShapes());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        else if (src.getText().equals("Clear")) {
+            drawComponent.clear();
+        }
+        else {
+            for (String className : classNames) {
+                drawComponent.setClassName(className);
+            }
+        }
     }
 }
