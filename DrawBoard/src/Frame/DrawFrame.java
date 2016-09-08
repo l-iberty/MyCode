@@ -2,7 +2,7 @@ package Frame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,6 +14,7 @@ public class DrawFrame extends JFrame implements ActionListener {
     private DrawComponent drawComponent;
     private static final int DEFAULT_WIDTH = 1200;
     private static final int DEFAULT_HEIGHT = 700;
+    private ArrayList<String> classNames = ButtonFactory.getClassNames();
 
     public DrawFrame() {
         setTitle("DrawBoard");
@@ -22,7 +23,6 @@ public class DrawFrame extends JFrame implements ActionListener {
 
         drawComponent = new DrawComponent();
         JPanel buttonPanel = new JPanel();
-        ArrayList<String> classNames = ButtonFactory.getClassNames();
 
         for (String className : classNames) {
             String graphClassName = "Shapes." + className;
@@ -55,7 +55,7 @@ public class DrawFrame extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent evt) {
-        Object src = evt.getSource();
+        JButton src = (JButton) evt.getSource();
 
         if (src.getText().equals("Save")) {
             try {

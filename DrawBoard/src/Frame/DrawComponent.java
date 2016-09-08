@@ -7,9 +7,7 @@ import Shapes.*;
 import Painter.*;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.geom.Point2D;
 import java.io.EOFException;
 import java.io.IOException;
