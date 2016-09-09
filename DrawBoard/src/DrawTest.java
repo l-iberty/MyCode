@@ -23,9 +23,9 @@ public class DrawTest {
                  *向上转型的实际意义只体现在函数调用时涉及参数传递和返回值时,
                  *原来的代码中此处使用的向上转型没有任何意义.
                  */
-                //drawFrame.setTitle("DrawBoard");
-                //drawFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                //drawFrame.setVisible(true);
+                drawFrame.setTitle("DrawBoard");
+                drawFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                drawFrame.setVisible(true);
             }
         });
         /*
