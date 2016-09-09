@@ -4,7 +4,6 @@ import Shapes.MyShape;
 
 public class ShapeFactory {
     public static MyShape createShapeInstance(String className) {
-    	System.out.println(className);
         MyShape s = null;
 
         try {

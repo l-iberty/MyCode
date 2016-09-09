@@ -5,11 +5,8 @@ import java.awt.geom.Point2D;
 import java.io.Serializable;
 import java.util.Vector;
 
-/**
- * Created by Specific on 16/5/4.
- **/
-
 public abstract class MyShape implements Serializable{
+    protected BasicStroke pen = new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
 
     public abstract String getButtonName();
 

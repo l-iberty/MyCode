@@ -4,43 +4,35 @@ import util.Mover;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
+import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 import java.util.Vector;
 
-public class MyRectangle extends MyShape implements Serializable {
-    private Rectangle2D rectangle2D = new Rectangle2D.Double();
+public class MyEllipse extends MyShape implements Serializable {
+    private Ellipse2D ellipse2D = new Ellipse2D.Double();
     private Point2D[] points = new Point2D[2];
 
     @Override
     public String getButtonName() {
-        return "Rectangle";
+        return "Ellipse";
     }
 
     @Override
     public String getClassName() {
-        return "MyRectangle";
+        return "MyEllipse";
     }
 
     @Override
     public void init() {
-        rectangle2D.setFrameFromDiagonal(points[0], points[1]);
-        /*
-         *setFrameFromDiagonal()是Rectangle2D的超类RectangularShape的公有方法,
-         *注释文档云:
-         * Sets the diagonal of the framing rectangle of this <code>Shape</code>
-         * based on two specified <code>Point2D</code> objects.  The framing
-         * rectangle is used by the subclasses of <code>RectangularShape</code>
-         * to define their geometry.
-         */
+        ellipse2D.setFrameFromDiagonal(points[0], points[1]);
     }
 
     public double getWidth() {
-        return rectangle2D.getWidth();
+        return ellipse2D.getWidth();
     }
 
     public double getHeight() {
-        return rectangle2D.getHeight();
+        return ellipse2D.getHeight();
     }
 
     @Override
@@ -54,13 +46,12 @@ public class MyRectangle extends MyShape implements Serializable {
         graphics2D.setStroke(pen);
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics2D.draw(rectangle2D);
+        graphics2D.draw(ellipse2D);
     }
 
     @Override
     public boolean contains(Point2D p) {
-        return rectangle2D.contains(p);
-        //判断点是否在rectangle内
+        return ellipse2D.contains(p);
     }
 
     @Override

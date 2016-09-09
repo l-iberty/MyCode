@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Vector;
 
 public class MySquare extends MyShape implements Serializable {
@@ -35,7 +34,7 @@ public class MySquare extends MyShape implements Serializable {
 
     @Override
     public String getButtonName() {
-        return "square";
+        return "Square";
     }
 
     @Override
@@ -46,6 +45,9 @@ public class MySquare extends MyShape implements Serializable {
     @Override
     public void draw(Graphics g) {
         Graphics2D graphics2D = (Graphics2D) g;
+        graphics2D.setStroke(pen);
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2D.draw(square);
     }
 
@@ -60,7 +62,7 @@ public class MySquare extends MyShape implements Serializable {
 
     @Override
     public void move(Point2D p1, Point2D p2) {
-        Mover.mover(p1, p2, points);
+        Mover.move(p1, p2, points);
         init();
     }
 }

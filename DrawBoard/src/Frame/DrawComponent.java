@@ -27,11 +27,11 @@ public class DrawComponent extends JComponent {
     private MyShape drawingShape;
     private MyShape currentShape = null;
     private MyPainter painter;
-
-    private Point2D[] moveVector = new Point2D[2];
+    private Point2D[] movePoint = new Point2D[2];
 
     public DrawComponent() {
         shapes = new ArrayList<>();
+
         try {
             shapes = SaveRead.Read();
         } catch (EOFException e) {
@@ -43,6 +43,7 @@ public class DrawComponent extends JComponent {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         addMouseListener(new MouseHandler());
         addMouseMotionListener(new MouseMotionHandler());
         /*
@@ -56,11 +57,12 @@ public class DrawComponent extends JComponent {
         return shapes;
     }
 
-    public void setClassName(String classname) {
-        String painterName = "Painter." + classname + "Painter";
+    public void setPainter(String shapeName) {
+        String painterName = "Painter." + shapeName + "Painter";
         painter = PainterFactory.createPainterInstance(painterName);
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         for (MyShape s : shapes) {
             s.draw(g);
@@ -69,7 +71,7 @@ public class DrawComponent extends JComponent {
 
     void clear() {
         shapes.clear();
-        repaint();
+        repaint();//转向调用paintComponent()
     }
 
     public MyShape find(Point2D p) {
@@ -92,12 +94,20 @@ public class DrawComponent extends JComponent {
             if (currentShape == null) {
                 drawingShape = painter.mousePressed(e);// 返回一个MyShape子类对象
                 if (drawingShape != null)
-                    shapes.add(drawingShape);// 将绘制出的对象添加到ArrayList中
+                    shapes.add(drawingShape);
+                    /*
+                     *将绘制出的对象添加到ArrayList中,调用repaint()时将转向调用
+                     *paintComponent(),以此实现drawingShape的重绘.
+                     */
                 repaint();
             } else {
-                setClassName(currentShape.getClassName());
-                moveVector[0] = e.getPoint();
+                setPainter(currentShape.getClassName());
+                movePoint[0] = e.getPoint();
             }
+            /*
+             *如果在图形外面按下鼠标,将进入绘画模式;
+             *如果在图形内部按下鼠标,将进入拖动模式.
+             */
         }
 
         @Override
@@ -114,9 +124,17 @@ public class DrawComponent extends JComponent {
                 drawingShape = painter.mouseDragged(e);
                 repaint();
             } else {
-                moveVector[1] = e.getPoint();
-                currentShape.move(moveVector[0], moveVector[1]);
-                moveVector[0] = moveVector[1];
+                movePoint[1] = e.getPoint();
+                currentShape.move(movePoint[0], movePoint[1]);
+                // Pay attention to this statement!
+                movePoint[0] = movePoint[1];
+                /*
+                 *该语句的作用非常重要,缺少之则不能正常移动图形.
+                 *该语句使得在拖动鼠标的过程中movePoint[0]和
+                 *movePoint[1]始终只相差一个像素单位.
+                 *如果存在该语句，鼠标移动N个单位,图形上的点移动N个单位;
+                 *没有的话鼠标移动N个单位，图形将移动1+2+...+N个单位.
+                 */
                 repaint();
             }
         }

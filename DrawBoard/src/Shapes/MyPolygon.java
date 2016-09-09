@@ -11,7 +11,7 @@ public class MyPolygon extends MyShape implements Serializable{
 
     @Override
     public String getButtonName() {
-        return "polygon";
+        return "Polygon";
     }
 
     @Override
@@ -37,6 +37,9 @@ public class MyPolygon extends MyShape implements Serializable{
     @Override
     public void draw(Graphics g) {
         Graphics2D graphics2D = (Graphics2D) g;
+        graphics2D.setStroke(pen);
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2D.drawPolygon(polygon);
     }
 

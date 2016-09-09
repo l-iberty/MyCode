@@ -3,12 +3,12 @@ package util;
 import java.awt.geom.Point2D;
 
 public class Mover {
-    public static void mover(Point2D p1, Point2D p2, Point2D[] points) {
+    public static void move(Point2D p1, Point2D p2, Point2D[] points) {
     	/*
     	 *该移动方法的处理对象是除多边形外的图形,多边形有自己的移动方法.
     	 */
 
-    	//移动时鼠标从p1->p2;points储存图形的特征点
+    	//移动时鼠标从p1->p2; points储存图形的特征点
         double dx = p2.getX() - p1.getX();
         double dy = p2.getY() - p1.getY();
         //设置新的特征点

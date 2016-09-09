@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 import java.util.Vector;
 
 public abstract class MyPainter {
-    Vector<Point2D> points = new Vector<Point2D>();
+    protected Vector<Point2D> points = new Vector<Point2D>();
 
     public abstract MyShape mousePressed(MouseEvent e);
     public abstract void mouseReleased(MouseEvent e);

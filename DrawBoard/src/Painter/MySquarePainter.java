@@ -23,7 +23,7 @@ public class MySquarePainter extends MyPainter{
 
     @Override
     public MyShape mouseDragged(MouseEvent e) {
-        Dragger.dragged(e, points, drawingShape);
+        Dragger.drag(e, points, drawingShape);
         return drawingShape;
     }
 }

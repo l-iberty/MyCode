@@ -14,17 +14,16 @@ public class DrawFrame extends JFrame implements ActionListener {
     private DrawComponent drawComponent;
     private static final int DEFAULT_WIDTH = 1200;
     private static final int DEFAULT_HEIGHT = 700;
-    private ArrayList<String> classNames = ButtonFactory.getClassNames();
+    private ArrayList<String> classNamesOfShapes = ButtonFactory.getClassNamesOfShapes();
+    // classNamesOfShapes存储的字符串是Shapes里的类名: MyLine...
 
     public DrawFrame() {
-        setTitle("DrawBoard");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
         drawComponent = new DrawComponent();
         JPanel buttonPanel = new JPanel();
 
-        for (String className : classNames) {
+        for (String className : classNamesOfShapes) {
             String graphClassName = "Shapes." + className;
             //addButton(buttonPanel, ShapeFactory.createShapeInstance(graphClassName).getButtonName(),
             //	e -> drawComponent.setClassName(className));
@@ -68,9 +67,7 @@ public class DrawFrame extends JFrame implements ActionListener {
             drawComponent.clear();
         }
         else {
-            for (String className : classNames) {
-                drawComponent.setClassName(className);
-            }
+            drawComponent.setPainter("My" + src.getText());
         }
     }
 }

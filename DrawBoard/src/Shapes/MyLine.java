@@ -28,7 +28,7 @@ public class MyLine extends MyShape implements Serializable {
 
     @Override
     public String getButtonName() {
-        return "line";
+        return "Line";
     }
 
     @Override
@@ -49,6 +49,9 @@ public class MyLine extends MyShape implements Serializable {
     @Override
     public void draw(Graphics g) {
         Graphics2D graphics2D = (Graphics2D) g;
+        graphics2D.setStroke(pen);
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2D.draw(line2D);
     }
 
@@ -56,18 +59,14 @@ public class MyLine extends MyShape implements Serializable {
     public boolean contains(Point2D p) {
         return (line2D.ptLineDist(p.getX(), p.getY()) < 2.0);
         /*
-         *注释文档云:
-         * "Tests if a specified coordinate is inside the boundary of this
-         * Line2D."
-         *如果是这样的话应该返回布尔值,而且如文档所述,总返回false;
-         *可源代码显示,该方法和ptLineDist(double px, double py)一样,都是——
-         * "Returns the distance from a <code>Point2D</code> to this line."
+         *超类中规定contains()总返回false,因为直线面积为0.这里
+         *把条件改为:只要点击位置离直线距离在2个像素内就行了.
          */
     }
 
     @Override
     public void move(Point2D p1, Point2D p2) {
-        Mover.mover(p1, p2, points);
+        Mover.move(p1, p2, points);
         init();
     }
 }

@@ -5,16 +5,12 @@ import Frame.DrawFrame;
 
 public class DrawTest {
     public static void main(String args[]) {
-        DrawFrame drawFrame = new DrawFrame();
-        drawFrame.setTitle("DrawBoard");
-        drawFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        drawFrame.setVisible(true);
         /*
          *创建匿名内部类,该类实现接口Runnable.
          */
-        //SwingUtilities.invokeLater(new Runnable() {
-            //public void run() {
-                //DrawFrame drawFrame = new DrawFrame();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                DrawFrame drawFrame = new DrawFrame();
                 /*
                  *原来的代码中使用了向上转型：
                  * JFrame frame = new DrawFrame();
@@ -30,8 +26,8 @@ public class DrawTest {
                 //drawFrame.setTitle("DrawBoard");
                 //drawFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 //drawFrame.setVisible(true);
-            //}
-        //});
+            }
+        });
         /*
          *SwingUtilities.invokeLater()会调转调用EventQueue.invokeLater().
          *通过将Swing事件添加到事件队列中来避免冲突.这种冲突来自于其他线程
