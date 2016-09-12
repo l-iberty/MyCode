@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript">
+			function processChild(element) {
+				var child = element.firstChild;
+
+				while (child) {
+					if (child.nodeType == 1) {
+						console.log(child.tagName + " is an element");
+						processChild(child);
+					}
+					if (child.nodeType == 3) // 空白文本节点
+						console.log(child.tagName);
+
+					child = child.nextSibling;
+				}
+
+			}
+
+			// ELement Traversal
+			function processChild2(element) {
+				var child = element.firstElementChild; // 不包含空白文本节点,仅返回元素
+
+				while (child) {
+					console.log(child.tagName + " is an element");
+					processChild2(child);
+					child = child.nextElementSibling;
+				}
+
+			}
+
+			function onclick_handler() {
+				processChild2(document.body);
+			}
+
+			/*
+			 *innerHTML & outerHTML
+			 *在读模式下,innerHTML和outerHTML返回调用元素的所有子节点的HTML标签;
+			 *在写模式下,innerHTML的内容被解析为DOM子树,替换调用元素的所有子节点;
+			 *而outerHTML会根据指定的HTML字符串创建DOM子树,并用着棵DOM树替换调用元素.
+			 */
+			function showInnerHTML() {
+				alert(document.body.innerHTML);
+			}
+
+			function showOuterHTML() {
+				alert(document.body.outerHTML);
+			}
+
+			function setInnerHTML() {
+				document.getElementsByTagName("ul")[0] .innerHTML = "<div>This is a DIV</div>";
+			}
+
+			function setOuterHTML() {
+				document.getElementsByTagName("ul")[0].outerHTML = "<p>This is a paragraph</p>";
+			}
+
+			function showChildren() {
+				var childrenCount = document.body.children.length;
+				var children = document.body.children; // Only elements.
+
+				console.log(childrenCount);
+				console.log(children); // HTMLCollection
+
+				for (var i = 0; i < childrenCount; i++)
+					console.log(children[i].tagName);
+			}
+
+			function showChildren2() {
+				var childrenCount = document.body.childNodes.length;
+				var children = document.body.childNodes; // Not only elements but something undefined.
+
+				console.log(childrenCount);
+				console.log(children);
+
+				for (var i = 0; i < childrenCount; i++)
+					console.log(children[i].tagName);
+			}
+
+			function contains() {
+				alert(document.documentElement.contains(document.body));
+				/*
+				 *element.contains(childElement) 检测childElement是否为
+				 *element的后代节点.
+				 *此处document.documentElement是文档对象的根节点<html>
+				 *的引用,检测<body>是否为<html>的后代节点.
+				 */
+			}
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li><div>Item 1</div></li>
+			<li><div>Item 2</div></li>
+			<li><div>Item 3</div></li>
+		</ul>
+
+		<input type="button" value="ProcessChild" onclick="onclick_handler()" />
+		<input type="button" value="ShowInnerHTML" onclick="showInnerHTML()" />
+		<input type="button" value="ShowOuterHTML" onclick="showOuterHTML()" />
+		<input type="button" value="SetInnererHTML" onclick="setInnerHTML()" />
+		<input type="button" value="SetOuterHTML" onclick="setOuterHTML()" />
+		<input type="button" value="ShowChildren" onclick="showChildren()" />
+		<input type="button" value="ShowChildren2" onclick="showChildren2()" />
+		<input type="button" value="Contains Test" onclick="contains()" />
+	</body>
+</html>
