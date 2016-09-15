@@ -20,6 +20,7 @@ class GaussianBlur {
     }
 
     private void setRGB(BufferedImage image) {
+        // O(width * height)
         int width = image.getWidth();
         int height = image.getHeight();
         rgbInfo = new RGBInfo[width][height];
@@ -32,6 +33,7 @@ class GaussianBlur {
 	}
 
     private BufferedImage createBufferedImage(String filename) {
+        // O(1)
         try {
             File imgFile = new File(filename);
             BufferedImage image = ImageIO.read(imgFile);
@@ -60,6 +62,7 @@ class GaussianBlur {
     }*/
 
     public void setWeightMatrix(int blurRadius) {
+        // O(r^2)
         int N = blurRadius * 2 + 1;
         double weightSum = 0;        
         weightMatrix = new WeightMatrixTbl[N][N];
@@ -95,6 +98,7 @@ class GaussianBlur {
     }*/
 
     private RGBInfo[][] getMatrix(int x, int y, int blurRadius) {
+        // O(r^2)
         int N = blurRadius * 2 + 1;
         RGBInfo[][] tmp_rgbInfo = new RGBInfo[N][N];
 
@@ -111,6 +115,7 @@ class GaussianBlur {
     }
 
     private int getBlurValue(int x, int y, int blurRadius) {
+        // O(r^2)
         int blurValue;
         int blurValue_R, blurValue_G, blurValue_B;
         RGBInfo[][] tmp_rgbInfo = getMatrix(x, y, blurRadius);
@@ -131,16 +136,20 @@ class GaussianBlur {
     }
 
     public void do_GaussianBlur(String filename, int blurRadius) {
+        /*
+         * O(width * height * r^2)
+         */
         BufferedImage imgIn = createBufferedImage(filename);
         BufferedImage imgOut = new BufferedImage(imgIn.getWidth(), imgIn.getHeight(),
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D graph = (Graphics2D) imgOut.getGraphics();
-        setRGB(imgIn);
-        setWeightMatrix(blurRadius);
+        setRGB(imgIn); // O(width * height)
+        setWeightMatrix(blurRadius); // O(r^2)
 
+        // O(width * height * r^2)
         for (int i = 0; i < rgbInfo.length; i++) {
             for (int j = 0; j < rgbInfo[i].length; j++) {
-                int blurValue = getBlurValue(i, j, blurRadius);
+                int blurValue = getBlurValue(i, j, blurRadius);// O(r^2)
                 Color color = new Color(blurValue);
                 graph.setColor(color);
                 graph.drawLine(i, j, i+1, j+1);
