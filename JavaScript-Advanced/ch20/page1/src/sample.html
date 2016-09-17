@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<script type="text/javascript">
+			var jsonText;
+
+			var book = {
+				title: "Professional javaScript",
+				authors: ["Nicholas.C Zakas"],
+				edition: 3,
+				year: 2011,
+
+				setTitle: function(title) {
+					this.title = title;
+				},
+
+				toJSON: function() {
+					return this.title;
+				},
+
+				info: undefined
+			};
+
+			//alert(book.title);
+			jsonText = JSON.stringify(book);
+			//jsonText = JSON.stringify(book, ["title", "authors"]);
+			//jsonText = JSON.stringify(book, null, 4);
+			// 第三个参数表示每个级别缩进的空格数
+			alert(jsonText);
+			/*
+			book.setTitle(undefined);
+			alert(book.title);
+			jsonText = JSON.stringify(book);
+			alert(jsonText);
+			*/
+			/*
+			var book2 = JSON.parse(jsonText);
+			for (var attr in book2)
+				alert(attr); // 不包括函数对象和无效值
+			*/
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
