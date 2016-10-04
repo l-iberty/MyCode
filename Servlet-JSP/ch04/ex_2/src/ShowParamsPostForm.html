@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>A Sample Using Post</title>
+		<style type="text/css">
+			div {
+				margin: 10px;
+				font-family: Arial;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>A Sample Using Post</h1>
+
+		<form action="/ch04_ex_2" method="post">
+			<div>Item Number: <input type="text" name="itemNum" /></div>
+			<div>Description: <input type="text" name="description" /></div>
+			<div>Price Each: <input type="text" name="price" value="$" /></div>
+			<div>First Name: <input type="text" name="firstname" /></div>
+			<div>Last Name: <input type="text" name="lastname" /></div>
+			<div>Middle Initial: <input type="text" name="initial" /></div>
+			<div>
+				<p>Shipping Address:</p>
+				<textarea name="address" rows="3" cols="40"></textarea>
+			</div>
+			<div>
+				<p>Credit Card:</p>
+				<p>&nbsp;&nbsp;<input type="radio" name="cardType" value="Visa" />Visa</p>
+				<p>&nbsp;&nbsp;<input type="radio" name="cardType" value="MasterCard" />MasterCard</p>
+				<p>&nbsp;&nbsp;<input type="radio" name="cardType" value="Amex" />Amax</p>
+				<p>&nbsp;&nbsp;<input type="radio" name="cardType" value="Java Smart" />Java Smart</p>
+			</div>
+			<div>Credit Card Number: <input type="password" name="cardNum" /></div>
+			<div>Repeat Credit Card Number: <input type="password" name="cardNum" /></div>
+			<center><input type="submit" value="Submit Order" /></center>
+		</form>
+	</body>
+</html>
