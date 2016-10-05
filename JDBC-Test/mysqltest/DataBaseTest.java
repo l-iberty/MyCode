@@ -104,43 +104,6 @@ public class DataBaseTest {
 		}
 	}
 
-	public void checkJDBCVersion() {
-		System.out.println("\nChecking JDBC version...");
-		Connection connection = getConnection();
-		if (connection == null) {
-			System.out.println("Failure");
-			return;
-		}
-
-		int majorVersion = 1;
-		int minorVersion = 0;
-
-		try {
-			Statement statement = connection.createStatement(
-									ResultSet.TYPE_SCROLL_INSENSITIVE,
-									ResultSet.CONCUR_READ_ONLY);
-			//TYPE_SCROLL_INSENSITIVE 双向滚动，但不及时更新，就是如果数据库里的数据修改过，并不在ResultSet中反应出来
-			//CONCUR_READ_ONLY 不能用结果集更新数据库中的表
-			String query = "SELECT * FROM authors";
-			ResultSet resultSet = statement.executeQuery(query);
-			resultSet.last();
-			majorVersion = 2;
-		} catch (SQLException e) {
-			// do nothing
-		}
-
-		try {
-			DatabaseMetaData dbMetaData = connection.getMetaData();
-			majorVersion = dbMetaData.getJDBCMajorVersion();
-			minorVersion = dbMetaData.getJDBCMinorVersion();
-		} catch (SQLException e) {
-			// do nothing
-		} finally {
-			closeConnection(connection);
-		}
-		System.out.println("JDBC Version: " + majorVersion + "." + minorVersion);
-	}
-
 	public Connection getConnection() {
 		try {
 			Class.forName(driverClass);// 加载驱动程序类到Java解释器中
@@ -181,6 +144,5 @@ public class DataBaseTest {
 		database.testConnection();
 		database.createTable();
 		database.executeQuery();
-		//database.checkJDBCVersion();
 	}
 }
