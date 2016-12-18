@@ -1,0 +1,2 @@
+* pic.GIF为使用wiki搜索的格式
+* 缺少searchString或searchEngine都会显示404错误页面
