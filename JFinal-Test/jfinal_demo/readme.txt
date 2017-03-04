@@ -1,0 +1,1 @@
+最后选择 Run As -> Java Application, 然后再浏览器地址栏输入 localhost/hello, 页面显示 "Hello JFinal World!", 说明项目框架搭建成功.
