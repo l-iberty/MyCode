@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>userpage</title>
+	<script type="text/javascript">
+		function btnBorrow_onclick() {
+			window.open("userborrow.jsp");
+		}
+		function btnReturn_onclick() {
+			window.open("userreturn.jsp");
+		}
+	</script>
+</head>
+<body>
+<div>Welcome to Library Management System</div>
+<form action="/search_servlet">
+	<table>
+	<tr>
+		<td>id:</td>
+		<td><input type="text" name="id"></td>
+	</tr>
+	<tr>
+		<td>name:</td>
+		<td><input type="text" name="name"></td>
+	</tr>
+	<tr>
+		<td>author:</td>
+		<td><input type="text" name="author"></td>
+	</tr>
+	<tr>
+		<td>catagory:</td>
+		<td><input type="text" name="catagory"></td>
+	</tr>
+	<tr><td><input type="submit" value="search"></td></tr>
+	<tr>
+		<td><input type="button" value="book-borrowing page" onclick="btnBorrow_onclick()"></td>
+		<td><input type="button" value="book-returning page" onclick="btnReturn_onclick()"></td>
+	</tr>
+</table>
+</form>
+</body>
+</html>
