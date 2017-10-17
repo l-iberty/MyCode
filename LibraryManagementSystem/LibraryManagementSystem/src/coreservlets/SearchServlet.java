@@ -44,8 +44,8 @@ public class SearchServlet extends HttpServlet {
         // 除去第一个'and'
         int i = queryConditions.indexOf("and");
         if (i > 0) {
-        	queryConditions.replace(i, i + 3, "");
-    	}
+            queryConditions.replace(i, i + 3, "");
+        }
 
         // 连接数据库进行查询, 并显示返回的查询结果
         if (!queryConditions.toString().trim().equals("")) {
